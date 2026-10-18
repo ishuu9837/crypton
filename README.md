@@ -1,24 +1,6 @@
 # Y Eswar — serene portfolio
 
-Next.js portfolio matching the compact layout, illustrated scenery, dashed dividers and project presentation of https://www.ashutoshtiwari.me, personalized with Y Eswar's portrait, logo, experience, education, research, certifications and six projects.
-
-## Run
-
-Node.js 20.9+ and pnpm:
-
-```sh
-pnpm install --frozen-lockfile
-pnpm dev
-```
-
-For a production export:
-
-```sh
-pnpm build
-python3 scripts/preview.py
-```
-
-Open http://127.0.0.1:3000. The export is in `out/`. Stop an existing preview on port 3000 before starting another.
+Next.js portfolio matching the compact layout, illustrated scenery, dashed dividers and project presentation Y Eswar, logo, experience, education, research, certifications and six projects.
 
 ## Music and interactions
 
