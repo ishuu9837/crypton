@@ -1,3 +1,17 @@
+# Y Eswar — apps, data & research
+
+The portfolio now leads with Miracle and Telex in a fully refreshed editorial layout. The design uses warm neutrals, olive accents, serif display type, a personal gallery card, and a responsive light/dark theme. Existing ML project, research and résumé routes remain available.
+
+- `app/app-showcase.tsx`: server-rendered app cards with decorative product illustrations, requirements, preview labels, release and source links.
+- `app/content.ts`: app information and existing portfolio content.
+- `app/portfolio.css`: the new visual system, loaded after the shared base styles.
+- `app/page.tsx`: new hero and page composition.
+- `app/site-chrome.tsx`: navigation and keyboard search, including both apps.
+
+Run `pnpm install --frozen-lockfile`, `pnpm dev`, or `pnpm build`. App download links go to GitHub Releases so visitors can choose the appropriate build and review setup notes. Product illustrations are decorative concepts, not screenshots.
+
+## Previous edition notes
+
 # Y Eswar — serene portfolio
 
 Next.js portfolio matching the compact layout, illustrated scenery, dashed dividers and project presentation Y Eswar, logo, experience, education, research, certifications and six projects.

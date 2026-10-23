@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import './portfolio.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ishuu.me'),
-  title: 'Y Eswar — Data Scientist, ML Engineer & Researcher',
-  description: 'Y Eswar builds end-to-end AI pipelines, deep learning models and data-driven solutions. M.Tech Data Science researcher at GITAM University, Hyderabad.',
+  title: 'Y Eswar — App Maker, Data Scientist & ML Engineer',
+  description: 'Y Eswar builds Miracle and Telex, native desktop apps with local processing, alongside AI pipelines and deep learning research. M.Tech Data Science researcher at GITAM University, Hyderabad.',
   alternates: { canonical: 'https://ishuu.me' },
-  openGraph: { title: 'Y Eswar · Data, research & design', description: 'A curious mind at the intersection of data science, machine learning and design.', url: 'https://ishuu.me', type: 'website' },
-  twitter: { card: 'summary', title: 'Y Eswar · Data, research & design', description: 'Data Scientist, ML Engineer and M.Tech researcher. Hyderabad, India.' },
+  openGraph: { title: 'Y Eswar · Apps, data & research', description: 'Native desktop apps, useful tools and machine learning research by Y Eswar.', url: 'https://ishuu.me', type: 'website' },
+  twitter: { card: 'summary', title: 'Y Eswar · Apps, data & research', description: 'Data Scientist, ML Engineer and M.Tech researcher. Hyderabad, India.' },
   icons: { icon: '/favicon.svg' },
 };
 
