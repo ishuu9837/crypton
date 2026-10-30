@@ -178,3 +178,6 @@
 /* The portfolio opens directly to its first page. */
 .sb-scene[data-phase=book]{--book-open:1;--reading:1}
 @media(max-width:700px){.sb-navigation button{min-width:44px;min-height:44px}.sb-top-actions button{min-height:44px}.sb-navigation{gap:14px}}
+.sb-open-book{font:italic 23px FieldCaption,Georgia,serif;min-height:44px;padding:4px 16px}
+.sb-scene[data-phase=cover] .sb-edge-tabs{visibility:hidden}
+.sb-scene[data-phase=cover] .sb-book-world:before{opacity:0}

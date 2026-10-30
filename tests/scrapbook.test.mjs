@@ -57,13 +57,13 @@ test('native page turns have stable resting intervals without scroll snapping',(
  for(const position of [4.81,4.95,5,5.1])assert.deepEqual(pageState(position,7),{index:1,fraction:0});
  assert.ok(pageState(4.6,7).fraction>pageState(4.4,7).fraction);
 });
-test('chapter navigation matches the book-only reading timeline',async()=>{
+test('chapter navigation matches the cover and reading timeline',async()=>{
  const {scrollFraction,scrollUnits}=await import('../app/scrapbook/scene-state.mjs');
  for(const frames of [7,14]){
   assert.equal(scrollFraction(0,frames),0);
   assert.equal(scrollFraction(4+frames-1+.35,frames),1);
-  assert.ok(Math.abs(scrollFraction(4,frames)*scrollUnits(frames))<1e-8);
-  for(let page=0;page<frames;page++)assert.ok(Math.abs(scrollFraction(4+page,frames)*scrollUnits(frames)-(page*.85))<1e-8);
+  assert.ok(Math.abs(scrollFraction(4,frames)*scrollUnits(frames)-.9)<1e-8);
+  for(let page=0;page<frames;page++)assert.ok(Math.abs(scrollFraction(4+page,frames)*scrollUnits(frames)-(.9+page*.85))<1e-8);
  }
 });
 

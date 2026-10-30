@@ -6,10 +6,10 @@ export function pageState(position, frames) {
   const index=Math.min(frames-1,Math.floor(page+.2+1e-9));
   return {index,fraction:index===frames-1?0:clamp((page-index-.2)/.6)};
 }
-export function scrollUnits(frames){return (frames-1+.35)*.85;}
+export function scrollUnits(frames){return .9+(frames-1+.35)*.85;}
 export function scrollFraction(position,frames){
   const value=Math.max(0,Math.min(4+frames-1+.35,position));
-  return Math.max(0,(value-4)*.85)/scrollUnits(frames);
+  return (value<4?clamp(value-3)*.9:.9+(value-4)*.85)/scrollUnits(frames);
 }
 export function boundedDelta(delta, min, max) {
   // Oversized paper should still move predictably instead of jumping on touch.
