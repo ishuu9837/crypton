@@ -1,6 +1,6 @@
 # Open items
 
-- Cross-Domain Few-Shot Learning for Histopathology: live demo URL not supplied. No demo button is rendered.
+Current academic work is represented by a general professional summary only.
 - Real-Time Face Detection Using OpenCV publication: ResearchGate URL not supplied. A paper-request email link is provided.
 - EduSentinel publication: ResearchGate URL not supplied. A paper-request email link is provided.
 - Heart Disease Prediction and Image Colourisation: no demo or repository URLs supplied. No invented links are shown.
