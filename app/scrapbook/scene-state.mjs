@@ -1,11 +1,15 @@
 export const clamp = value => Math.min(1, Math.max(0, value));
-// Native scroll is quantized to physical pixels. Snap near each resting spread
-// so a chapter button cannot leave its last leaf fractionally open.
+// Each leaf has a resting interval before and after its turn. Native scrolling
+// remains uninterrupted; there is no automatic scroll snap pulling it backward.
 export function pageState(position, frames) {
-  let page = Math.max(0, position - 4);
-  if (Math.abs(page - Math.round(page)) < .012) page = Math.round(page);
-  const index = Math.min(frames - 1, Math.floor(page));
-  return { index, fraction: index === frames - 1 ? 0 : page - index };
+  const page=Math.max(0,position-4);
+  const index=Math.min(frames-1,Math.floor(page+.2+1e-9));
+  return {index,fraction:index===frames-1?0:clamp((page-index-.2)/.6)};
+}
+export function scrollUnits(frames){return 2.5+(frames-1+.35)*.85;}
+export function scrollFraction(position,frames){
+  const value=Math.max(0,Math.min(4+frames-1+.35,position));
+  return (value<=4?value/4*2.5:2.5+(value-4)*.85)/scrollUnits(frames);
 }
 export function boundedDelta(delta, min, max) {
   // Oversized paper should still move predictably instead of jumping on touch.
@@ -25,3 +29,4 @@ export function floatingLayout(f, x, y, pageWidth, viewportWidth, viewportHeight
     width,height,pageWidth:f.pageWidth*scale,viewportWidth,viewportHeight
   };
 }
+export function paperOffset(open,height){return (1-clamp(open))*height*.78;}
