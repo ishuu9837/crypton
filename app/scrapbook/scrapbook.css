@@ -175,3 +175,6 @@
 .sb-book-world,.sb-book-inner{transform-style:flat}
 .sb-base,.sb-reveal{transform:translateZ(0)}
 .sb-approved-paper{transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}
+/* The portfolio opens directly to its first page. */
+.sb-scene[data-phase=book]{--book-open:1;--reading:1}
+@media(max-width:700px){.sb-navigation button{min-width:44px;min-height:44px}.sb-top-actions button{min-height:44px}.sb-navigation{gap:14px}}
