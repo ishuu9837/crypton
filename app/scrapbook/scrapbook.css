@@ -153,3 +153,25 @@
 .sb-controls{bottom:58px}.sb-intro-hint{padding-top:8px}.sb-desk-label{display:none}
 @media(max-width:700px){.sb-scene{--sb-stage-top:76px;--sb-stage-bottom:134px}.sb-stage .sb-newspaper{width:min(89vw,calc(var(--sb-content-height) * .78))}.sb-controls{bottom:52px}.sb-intro-hint>span{font-size:20px}}
 @media(max-height:500px){.sb-scene{--sb-stage-top:58px;--sb-stage-bottom:110px}.sb-controls{bottom:35px}.sb-intro-hint>span{font-size:17px}.sb-intro-hint p{font-size:8px}.sb-desk-caption{display:none}}
+/* Measured dimensions and GSAP percent centering are reliable in WebKit. */
+.sb-stage .sb-newspaper,.sb-stage .sb-book-world{translate:none;transform:none}
+.sb-newspaper{visibility:hidden}
+.sb-news-sheet{min-height:0}
+.sb-flip-front,.sb-flip-back,.sb-approved-cover{-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.sb-flip-back{transform:rotateY(180deg) translateZ(.1px)}
+.sb-scene{height:100vh;height:100svh}
+/* Keep one 3D projection. Nested perspectives amplify leaf depth in Safari. */
+.sb-scene{perspective:none}
+.sb-book-inner{perspective:none}
+/* Avoid a clipped two-page 3D layer: Safari can clip its siblings as well. */
+.sb-approved-binding{z-index:0}
+.sb-base,.sb-reveal{transform-style:flat;isolation:isolate}
+.sb-base{z-index:1}
+.sb-reveal{left:50%;width:50%;clip-path:none;z-index:2}
+.sb-reveal>.sb-page{width:100%}
+.sb-scene[data-layout=single] .sb-reveal{left:0;width:100%;clip-path:none}
+.sb-book-world{perspective:6000px}
+/* Keep stationary artwork in its own composited plane in WebKit. */
+.sb-book-world,.sb-book-inner{transform-style:flat}
+.sb-base,.sb-reveal{transform:translateZ(0)}
+.sb-approved-paper{transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden}

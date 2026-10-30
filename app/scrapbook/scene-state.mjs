@@ -30,3 +30,10 @@ export function floatingLayout(f, x, y, pageWidth, viewportWidth, viewportHeight
   };
 }
 export function paperOffset(open,height){return (1-clamp(open))*height*.78;}
+export function stageLayout(width,height,single){
+ const availableHeight=Math.max(1,height)*.85;
+ const bookRatio=single?692/806:1384/806;
+ const bookWidth=Math.min(single?520:1190,width*(single?.9:.86),availableHeight*bookRatio);
+ const paperWidth=Math.min(650,width*(single?.89:.78),availableHeight*.78);
+ return {bookWidth,bookHeight:bookWidth/bookRatio,paperWidth,paperHeight:paperWidth/.78};
+}
