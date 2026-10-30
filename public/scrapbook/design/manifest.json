@@ -1,0 +1,639 @@
+{
+  "pages": [
+    {
+      "src": "/scrapbook/design/page-0.svg",
+      "width": 692,
+      "height": 806,
+      "text": "Y ESWAR / ABOUT ME\n01\n01 / THE PERSON BEHIND THE WORK\nHi, I'm Eswar.\nResearch & applied AI\nhello!\nData, models and applied research.",
+      "assets": [
+        {
+          "id": "page-0-0",
+          "label": "Portrait of Eswar",
+          "src": "/scrapbook/design/page-0-piece-0.svg",
+          "x": 43.9046113317485,
+          "y": 169.0888193859205,
+          "width": 394.19077733650306,
+          "height": 477.822361228159
+        },
+        {
+          "id": "page-0-1",
+          "label": "Hello sticker",
+          "src": "/scrapbook/design/page-0-piece-1.svg",
+          "x": 467,
+          "y": 201,
+          "width": 148,
+          "height": 148
+        },
+        {
+          "id": "page-0-2",
+          "label": "Neural network sticker",
+          "src": "/scrapbook/design/page-0-piece-2.svg",
+          "x": 486,
+          "y": 437,
+          "width": 110,
+          "height": 110
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-1.svg",
+      "width": 692,
+      "height": 806,
+      "text": "KEEP TURNING THE PAGE\n02\nHYDERABAD, INDIA\nData Scientist.\nResearcher.\nAI/ML Engineer.\nI am a data scientist, researcher and AI/ML engineer building\nuseful models and applications.\nMy work spans data analysis, deep learning and computer vision - from\npreparing data to evaluating models and making the results usable.\nDATA -> MODELS -> APPLICATIONS\nCURRENT CHAPTER\nM.Tech in Data Science\nGITAM University / data science + engineering",
+      "assets": [
+        {
+          "id": "page-1-0",
+          "label": "DATA -> MODELS -> APPLICATIONS",
+          "src": "/scrapbook/design/page-1-piece-0.svg",
+          "x": 65.68362126020838,
+          "y": 473.2595049160748,
+          "width": 445.63275747958323,
+          "height": 63.48099016785045
+        },
+        {
+          "id": "page-1-1",
+          "label": "Current chapter: M.Tech in Data Science",
+          "src": "/scrapbook/design/page-1-piece-1.svg",
+          "x": 56,
+          "y": 528,
+          "width": 561,
+          "height": 171
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-2.svg",
+      "width": 692,
+      "height": 806,
+      "text": "Y ESWAR / SKILLS\n03\nSKILLS / EXPERIMENTATION\nData & intelligence.\n01 / DATA & ANALYTICS\nPython\nSQL\nNumPy\nPandas\nPySpark\nPower BI\n02 / MACHINE LEARNING\nPyTorch\nTensorFlow\nKeras\nScikit-learn\nTransformers\n03 / COMPUTER VISION\nOpenCV\n04 / NOTEBOOKS\nJupyter\nGoogle Colab",
+      "assets": [
+        {
+          "id": "page-2-0",
+          "label": "Python skill sticky",
+          "src": "/scrapbook/design/page-2-piece-0.svg",
+          "x": 38.07288772609846,
+          "y": 164.4217226813845,
+          "width": 129.8542245478031,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-2-1",
+          "label": "SQL skill sticky",
+          "src": "/scrapbook/design/page-2-piece-1.svg",
+          "x": 178.12951623392553,
+          "y": 164.5195648972823,
+          "width": 129.74096753214894,
+          "height": 84.96087020543541
+        },
+        {
+          "id": "page-2-2",
+          "label": "NumPy skill sticky",
+          "src": "/scrapbook/design/page-2-piece-2.svg",
+          "x": 318.53084199993873,
+          "y": 165.20746990435237,
+          "width": 128.93831600012254,
+          "height": 83.58506019129527
+        },
+        {
+          "id": "page-2-3",
+          "label": "Pandas skill sticky",
+          "src": "/scrapbook/design/page-2-piece-3.svg",
+          "x": 457.960160250497,
+          "y": 164.22636368011183,
+          "width": 130.07967949900603,
+          "height": 85.54727263977634
+        },
+        {
+          "id": "page-2-4",
+          "label": "PySpark skill sticky",
+          "src": "/scrapbook/design/page-2-piece-4.svg",
+          "x": 38.07288772609846,
+          "y": 239.4217226813845,
+          "width": 129.8542245478031,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-2-5",
+          "label": "Power BI skill sticky",
+          "src": "/scrapbook/design/page-2-piece-5.svg",
+          "x": 178.12951623392553,
+          "y": 239.5195648972823,
+          "width": 129.74096753214894,
+          "height": 84.96087020543541
+        },
+        {
+          "id": "page-2-6",
+          "label": "PyTorch skill sticky",
+          "src": "/scrapbook/design/page-2-piece-6.svg",
+          "x": 38.07288772609846,
+          "y": 351.4217226813845,
+          "width": 129.8542245478031,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-2-7",
+          "label": "TensorFlow skill sticky",
+          "src": "/scrapbook/design/page-2-piece-7.svg",
+          "x": 178.12951623392553,
+          "y": 351.5195648972823,
+          "width": 129.74096753214894,
+          "height": 84.96087020543541
+        },
+        {
+          "id": "page-2-8",
+          "label": "Keras skill sticky",
+          "src": "/scrapbook/design/page-2-piece-8.svg",
+          "x": 318.53084199993873,
+          "y": 352.20746990435237,
+          "width": 128.93831600012254,
+          "height": 83.58506019129527
+        },
+        {
+          "id": "page-2-9",
+          "label": "Scikit-learn skill sticky",
+          "src": "/scrapbook/design/page-2-piece-9.svg",
+          "x": 457.960160250497,
+          "y": 351.2263636801118,
+          "width": 130.07967949900603,
+          "height": 85.5472726397764
+        },
+        {
+          "id": "page-2-10",
+          "label": "Transformers skill sticky",
+          "src": "/scrapbook/design/page-2-piece-10.svg",
+          "x": 38.07288772609846,
+          "y": 426.4217226813845,
+          "width": 129.8542245478031,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-2-11",
+          "label": "OpenCV skill sticky",
+          "src": "/scrapbook/design/page-2-piece-11.svg",
+          "x": 38.07288772609846,
+          "y": 538.4217226813845,
+          "width": 129.8542245478031,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-2-12",
+          "label": "Jupyter skill sticky",
+          "src": "/scrapbook/design/page-2-piece-12.svg",
+          "x": 38.07288772609846,
+          "y": 648.4217226813845,
+          "width": 129.8542245478031,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-2-13",
+          "label": "Google Colab skill sticky",
+          "src": "/scrapbook/design/page-2-piece-13.svg",
+          "x": 178.12951623392553,
+          "y": 648.5195648972823,
+          "width": 129.74096753214894,
+          "height": 84.96087020543541
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-3.svg",
+      "width": 692,
+      "height": 806,
+      "text": "KEEP TURNING THE PAGE\n04\nSKILLS / IMPLEMENTATION\nCode & creation.\n05 / WEB & INTERACTION\nJavaScript\nHTML\nCSS\nReact.js\nThree.js\n06 / APIS & DATABASES\nFlask\nMongoDB\nMySQL\n07 / CLOUD & DEVELOPMENT\nGit\nGitHub\nDocker\nVercel\nAWS\n08 / DESIGN & VISUAL TOOLS\nFigma\nCanva\nPhotoshop",
+      "assets": [
+        {
+          "id": "page-3-0",
+          "label": "JavaScript skill sticky",
+          "src": "/scrapbook/design/page-3-piece-0.svg",
+          "x": 54.07288772609843,
+          "y": 164.4217226813845,
+          "width": 129.85422454780314,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-3-1",
+          "label": "HTML skill sticky",
+          "src": "/scrapbook/design/page-3-piece-1.svg",
+          "x": 194.12951623392553,
+          "y": 164.5195648972823,
+          "width": 129.74096753214906,
+          "height": 84.96087020543541
+        },
+        {
+          "id": "page-3-2",
+          "label": "CSS skill sticky",
+          "src": "/scrapbook/design/page-3-piece-2.svg",
+          "x": 334.53084199993873,
+          "y": 165.20746990435237,
+          "width": 128.93831600012254,
+          "height": 83.58506019129527
+        },
+        {
+          "id": "page-3-3",
+          "label": "React.js skill sticky",
+          "src": "/scrapbook/design/page-3-piece-3.svg",
+          "x": 473.960160250497,
+          "y": 164.22636368011183,
+          "width": 130.07967949900603,
+          "height": 85.54727263977634
+        },
+        {
+          "id": "page-3-4",
+          "label": "Three.js skill sticky",
+          "src": "/scrapbook/design/page-3-piece-4.svg",
+          "x": 54.07288772609843,
+          "y": 239.4217226813845,
+          "width": 129.85422454780314,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-3-5",
+          "label": "Flask skill sticky",
+          "src": "/scrapbook/design/page-3-piece-5.svg",
+          "x": 54.07288772609843,
+          "y": 351.4217226813845,
+          "width": 129.85422454780314,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-3-6",
+          "label": "MongoDB skill sticky",
+          "src": "/scrapbook/design/page-3-piece-6.svg",
+          "x": 194.12951623392553,
+          "y": 351.5195648972823,
+          "width": 129.74096753214906,
+          "height": 84.96087020543541
+        },
+        {
+          "id": "page-3-7",
+          "label": "MySQL skill sticky",
+          "src": "/scrapbook/design/page-3-piece-7.svg",
+          "x": 334.53084199993873,
+          "y": 352.20746990435237,
+          "width": 128.93831600012254,
+          "height": 83.58506019129527
+        },
+        {
+          "id": "page-3-8",
+          "label": "Git skill sticky",
+          "src": "/scrapbook/design/page-3-piece-8.svg",
+          "x": 54.07288772609843,
+          "y": 461.4217226813845,
+          "width": 129.85422454780314,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-3-9",
+          "label": "GitHub skill sticky",
+          "src": "/scrapbook/design/page-3-piece-9.svg",
+          "x": 194.12951623392553,
+          "y": 461.5195648972823,
+          "width": 129.74096753214906,
+          "height": 84.96087020543541
+        },
+        {
+          "id": "page-3-10",
+          "label": "Docker skill sticky",
+          "src": "/scrapbook/design/page-3-piece-10.svg",
+          "x": 334.53084199993873,
+          "y": 462.20746990435237,
+          "width": 128.93831600012254,
+          "height": 83.58506019129527
+        },
+        {
+          "id": "page-3-11",
+          "label": "Vercel skill sticky",
+          "src": "/scrapbook/design/page-3-piece-11.svg",
+          "x": 473.960160250497,
+          "y": 461.22636368011183,
+          "width": 130.07967949900603,
+          "height": 85.54727263977634
+        },
+        {
+          "id": "page-3-12",
+          "label": "AWS skill sticky",
+          "src": "/scrapbook/design/page-3-piece-12.svg",
+          "x": 54.07288772609843,
+          "y": 536.4217226813845,
+          "width": 129.85422454780314,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-3-13",
+          "label": "Figma skill sticky",
+          "src": "/scrapbook/design/page-3-piece-13.svg",
+          "x": 54.07288772609843,
+          "y": 648.4217226813845,
+          "width": 129.85422454780314,
+          "height": 85.15655463723101
+        },
+        {
+          "id": "page-3-14",
+          "label": "Canva skill sticky",
+          "src": "/scrapbook/design/page-3-piece-14.svg",
+          "x": 194.12951623392553,
+          "y": 648.5195648972823,
+          "width": 129.74096753214906,
+          "height": 84.96087020543541
+        },
+        {
+          "id": "page-3-15",
+          "label": "Photoshop skill sticky",
+          "src": "/scrapbook/design/page-3-piece-15.svg",
+          "x": 334.53084199993873,
+          "y": 649.2074699043524,
+          "width": 128.93831600012254,
+          "height": 83.58506019129527
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-4.svg",
+      "width": 692,
+      "height": 806,
+      "text": "Y ESWAR / RESEARCH + CASE STUDIES\n05\nRESEARCH / CURRENT + PUBLISHED WORK\nResearch & case studies.\nQuestions, methods and design decisions.\n01 / ABOUT / DATA SCIENCE\nProfessional summary\nData scientist, researcher and AI/ML engineer.\nBackground in data analysis, machine learning and software.\nPursuing M.Tech in Data Science at GITAM University.\n02 / EDUCATION / RESEARCH\nEduSentinel\nStudies abnormal learning behaviour in LMS data.\nUses a NumPy-only deep autoencoder across eight features.\nIncludes a Flask demo; findings published on ResearchGate.",
+      "assets": [
+        {
+          "id": "page-4-0",
+          "label": "01 / Professional summary",
+          "src": "/scrapbook/design/page-4-piece-0.svg",
+          "x": 23.0,
+          "y": 178.0,
+          "width": 598.0,
+          "height": 266.0
+        },
+        {
+          "id": "page-4-1",
+          "label": "02 / EduSentinel",
+          "src": "/scrapbook/design/page-4-piece-1.svg",
+          "x": 23.0,
+          "y": 450.0,
+          "width": 598.0,
+          "height": 264.0
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-5.svg",
+      "width": 692,
+      "height": 806,
+      "text": "KEEP TURNING THE PAGE\n06\nCASEBOOK / SELECTED STUDIES\nFrom inquiry to application.\nA collection of five studies.\n03 / SUSTAINABILITY / CASE STUDY\nSmart Energy Grid\nData-driven demand forecasting and power distribution.\nProposed LSTM pipeline for forecasting and adaptive control.\nInteractive energy-balance demonstration.\n04 / COMPUTER VISION / RESEARCH\nReal-Time Face Detection\nOpenCV face-detection pipeline with Python.\nDetected faces are stored in MongoDB.\nResearch published on ResearchGate in December 2024.\n05 / INDEPENDENT PRODUCT-DESIGN CASE STUDY\nHarkPro / Artifacts design\nProject files, latest revisions and history beside the chat.\nVersion comparison, source-message links and file downloads.\nFrontend concept with fictional data; not a live integration.",
+      "assets": [
+        {
+          "id": "page-5-0",
+          "label": "03 / Smart Energy Grid",
+          "src": "/scrapbook/design/page-5-piece-0.svg",
+          "x": 39.0,
+          "y": 178.0,
+          "width": 598.0,
+          "height": 186.0
+        },
+        {
+          "id": "page-5-1",
+          "label": "04 / Real-Time Face Detection",
+          "src": "/scrapbook/design/page-5-piece-1.svg",
+          "x": 39.0,
+          "y": 358.0,
+          "width": 598.0,
+          "height": 186.0
+        },
+        {
+          "id": "page-5-2",
+          "label": "05 / HarkPro / Artifacts design",
+          "src": "/scrapbook/design/page-5-piece-2.svg",
+          "x": 39.0,
+          "y": 538.0,
+          "width": 598.0,
+          "height": 202.0
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-6.svg",
+      "width": 692,
+      "height": 806,
+      "text": "Y ESWAR / NATIVE APPS\n07\n03 / THINGS I HAVE BUILT\nMiracle\na new form for your files.\nON DEVICE\nORIGINAL\n.HEIC\nJPG\nPNG\nPDF\nConverts images, video, audio, documents and archives locally.\nNative Mac and Windows interfaces with platform-specific tools.\nMac file wheels; Windows format buttons and drag-wheel workflow.\nMAC + WINDOWS / PREVIEW BUILDS\nLOCAL FIRST",
+      "assets": [
+        {
+          "id": "page-6-0",
+          "label": "ON DEVICE",
+          "src": "/scrapbook/design/page-6-piece-0.svg",
+          "x": 457.77173308231954,
+          "y": 139.27040054333094,
+          "width": 155.45653383536091,
+          "height": 65.45919891333813
+        },
+        {
+          "id": "page-6-1",
+          "label": "Miracle file conversion diagram",
+          "src": "/scrapbook/design/page-6-piece-1.svg",
+          "x": 32,
+          "y": 197,
+          "width": 584,
+          "height": 301
+        },
+        {
+          "id": "page-6-2",
+          "label": "LOCAL FIRST",
+          "src": "/scrapbook/design/page-6-piece-2.svg",
+          "x": 387.09443879542,
+          "y": 644.6368058118852,
+          "width": 223.81112240915996,
+          "height": 66.72638837622958
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-7.svg",
+      "width": 692,
+      "height": 806,
+      "text": "KEEP TURNING THE PAGE\n08\n04 / WORDS NEAR THE CAMERA\nTelex\nkeep your eyes up. find your flow.\nTake a breath.\nKeep your eyes up.\nFind your flow.\nImport scripts, add cues and place the reader near the camera.\nChoose continuous scrolling or voice-level pacing.\nOptional on-device word following; scripts are stored locally.\nMACOS 14+ / DEVELOPMENT PREVIEW\nPROMPTER NOTE\nYour words. Your pace.",
+      "assets": [
+        {
+          "id": "page-7-0",
+          "label": "Telex teleprompter illustration",
+          "src": "/scrapbook/design/page-7-piece-0.svg",
+          "x": 48,
+          "y": 197,
+          "width": 584,
+          "height": 301
+        },
+        {
+          "id": "page-7-1",
+          "label": "PROMPTER NOTE: Your words. Your pace.",
+          "src": "/scrapbook/design/page-7-piece-1.svg",
+          "x": 298.7838631667537,
+          "y": 645.7181204880037,
+          "width": 326.4322736664926,
+          "height": 105.56375902399259
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-8.svg",
+      "width": 692,
+      "height": 806,
+      "text": "Y ESWAR / PROJECTS / DETAILED POINTS\n09\nPROJECTS / MODEL IMPLEMENTATION\nInside the projects.\n01 / ANOMALY DETECTION\nEduSentinel\nNumPy-only deep autoencoder using eight LMS features.\nFlags abnormal learning behaviour in education data.\nFlask demonstration with findings published on ResearchGate.\n02 / MEDICAL AI\nHeart Disease Prediction\nDeep autoencoder for the UCI Heart Disease dataset.\nThreshold tuning and class-imbalance handling.\nDropout and L1/L2 regularisation support model training.\n03 / COMPUTER VISION\nImage Colourisation\nU-Net convolutional autoencoder in LAB colour space.\nCIFAR-10 experiments with VGG perceptual loss.\nThree architecture iterations; TensorFlow to PyTorch migration.",
+      "assets": [
+        {
+          "id": "page-8-0",
+          "label": "01 / EduSentinel",
+          "src": "/scrapbook/design/page-8-piece-0.svg",
+          "x": 23.0,
+          "y": 150.0,
+          "width": 598.0,
+          "height": 200.0
+        },
+        {
+          "id": "page-8-1",
+          "label": "02 / Heart Disease Prediction",
+          "src": "/scrapbook/design/page-8-piece-1.svg",
+          "x": 23.0,
+          "y": 340.0,
+          "width": 598.0,
+          "height": 200.0
+        },
+        {
+          "id": "page-8-2",
+          "label": "03 / Image Colourisation",
+          "src": "/scrapbook/design/page-8-piece-2.svg",
+          "x": 23.0,
+          "y": 530.0,
+          "width": 598.0,
+          "height": 200.0
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-9.svg",
+      "width": 692,
+      "height": 806,
+      "text": "KEEP TURNING THE PAGE\n10\nPROJECTS / DATA INTO APPLICATIONS\nMethods & implementation.\n04 / BIG DATA / SUSTAINABILITY\nSmart Energy Grid\nCase study of data-driven demand forecasting.\nProposed pipeline links forecasting to adaptive grid control.\nInteractive energy-balance demo supports the case study.\n05 / RECOMMENDATION SYSTEMS\nMRS by Letterboxd\nPython backend encodes genres and ranks by cosine similarity.\nTitle, language, year and genre filters link users to Letterboxd.\nBrowser-side filtering remains available as a fallback.\n06 / COMPUTER VISION / DATA\nReal-Time Face Detection\nPython and OpenCV implement the detection pipeline.\nMongoDB stores the detected faces.\nFindings published on ResearchGate in December 2024.",
+      "assets": [
+        {
+          "id": "page-9-0",
+          "label": "04 / Smart Energy Grid",
+          "src": "/scrapbook/design/page-9-piece-0.svg",
+          "x": 39.0,
+          "y": 150.0,
+          "width": 598.0,
+          "height": 200.0
+        },
+        {
+          "id": "page-9-1",
+          "label": "05 / MRS by Letterboxd",
+          "src": "/scrapbook/design/page-9-piece-1.svg",
+          "x": 39.0,
+          "y": 340.0,
+          "width": 598.0,
+          "height": 200.0
+        },
+        {
+          "id": "page-9-2",
+          "label": "06 / Real-Time Face Detection",
+          "src": "/scrapbook/design/page-9-piece-2.svg",
+          "x": 39.0,
+          "y": 530.0,
+          "width": 598.0,
+          "height": 200.0
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-10.svg",
+      "width": 692,
+      "height": 806,
+      "text": "Y ESWAR / JOURNEY + CONTACT\n11\n07 / ACADEMIA INTO APPLICATION\nAcademic roots.\nApplied work.\nRESEARCH LED\n2021-2025\nB.Tech / CSE (AI)\nParul University. Foundations in AI and computing.\n2025-2027\nM.Tech / Data Science\nGITAM University. Modelling, experimentation and evaluation.\nCURRENT\nResearch into practice\nData science, machine learning and native desktop applications.\nResearch driven. Application minded.",
+      "assets": [
+        {
+          "id": "page-10-0",
+          "label": "RESEARCH LED",
+          "src": "/scrapbook/design/page-10-piece-0.svg",
+          "x": 395.0923830975519,
+          "y": 153.71530974624972,
+          "width": 220.81523380489625,
+          "height": 66.56938050750057
+        },
+        {
+          "id": "page-10-1",
+          "label": "Academic timeline",
+          "src": "/scrapbook/design/page-10-piece-1.svg",
+          "x": 32,
+          "y": 209,
+          "width": 584,
+          "height": 445
+        }
+      ]
+    },
+    {
+      "src": "/scrapbook/design/page-11.svg",
+      "width": 692,
+      "height": 806,
+      "text": "KEEP TURNING THE PAGE\n12\n08 / THE NEXT CHAPTER\nA question worth\nworking on?\nAn interesting dataset. A research collaboration. A\ntool that should exist.\nlet's start a conversation.\nfounder@ishuu.me\nGITHUB / LINKEDIN / RESUME\nHyderabad, India / open to collaborations\nThere is always another page.",
+      "assets": [
+        {
+          "id": "page-11-0",
+          "label": "Contact note: founder@ishuu.me",
+          "src": "/scrapbook/design/page-11-piece-0.svg",
+          "x": 51,
+          "y": 359,
+          "width": 574,
+          "height": 251
+        }
+      ]
+    }
+  ],
+  "cover": {
+    "src": "/scrapbook/design/cover.svg",
+    "width": 665,
+    "height": 856,
+    "text": "BELONGS TO\nY Eswar.\nData scientist by training.\nResearcher by academia.\nAI/ML engineer by practice.\nDATA SCIENTIST / RESEARCHER / AI-ML ENGINEER\nResearch & applied AI\nAI / ML\nRESEARCH -> REAL WORLD\nVOL. 01 / NOTES, MODELS & THINGS I BUILD",
+    "assets": [
+      {
+        "id": "cover-0",
+        "label": "Y Eswar cover title and roles",
+        "src": "/scrapbook/design/cover-piece-0.svg",
+        "x": 72,
+        "y": 102,
+        "width": 531,
+        "height": 329
+      },
+      {
+        "id": "cover-1",
+        "label": "Portrait of Eswar",
+        "src": "/scrapbook/design/cover-piece-1.svg",
+        "x": 67.10015784304017,
+        "y": 462.0099296577263,
+        "width": 281.79968431391967,
+        "height": 320.98014068454745
+      },
+      {
+        "id": "cover-2",
+        "label": "AI / ML",
+        "src": "/scrapbook/design/cover-piece-2.svg",
+        "x": 397.8685551109893,
+        "y": 449.5750415198386,
+        "width": 182.26288977802142,
+        "height": 80.84991696032284
+      },
+      {
+        "id": "cover-3",
+        "label": "Neural network sticker",
+        "src": "/scrapbook/design/cover-piece-3.svg",
+        "x": 468,
+        "y": 566,
+        "width": 170,
+        "height": 169
+      },
+      {
+        "id": "cover-4",
+        "label": "RESEARCH -> REAL WORLD",
+        "src": "/scrapbook/design/cover-piece-4.svg",
+        "x": 345.76679560075286,
+        "y": 737.3972365099789,
+        "width": 286.46640879849406,
+        "height": 79.20552698004212
+      }
+    ]
+  }
+}

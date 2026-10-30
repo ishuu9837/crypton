@@ -38,7 +38,7 @@ export const projects = [projectData[0], projectData[1], projectData[2], project
 
 export const skillGroups = [
   { title: 'Native app development', number: '00', description: 'Useful tools, built for the desktop.', skills: ['Swift','SwiftUI','AppKit','C#','WPF','.NET'] },
-  { title: 'Machine learning & AI', number: '01', description: 'From the first experiment to the trained model.', skills: ['PyTorch','TensorFlow','Keras','Scikit-learn','OpenCV','NumPy','Pandas','Autoencoders','U-Net','Few-shot learning'] },
+  { title: 'Machine learning & AI', number: '01', description: 'From the first experiment to the trained model.', skills: ['PyTorch','TensorFlow','Keras','Scikit-learn','OpenCV','NumPy','Pandas','Autoencoders','U-Net'] },
   { title: 'Programming & data', number: '02', description: 'The foundations behind the pipeline.', skills: ['Python','SQL','JavaScript','HTML/CSS','Flask','Django','MongoDB'] },
   { title: 'Cloud, BI & tools', number: '03', description: 'Making the work useful beyond the notebook.', skills: ['AWS','Docker','Power BI','Tableau','Git & GitHub','Jupyter','Google Colab','Linux','Claude','Manus','Codex'] },
 ];
@@ -79,17 +79,11 @@ export const publications = [
   { title: 'EduSentinel: Anomaly Detection in Education Using a Deep Autoencoder', description: 'Research findings from the abnormal learning behaviour detection project.', venue: 'ResearchGate', date: 'December 2024' },
 ];
 
-export const researchFacts = [
-  ['Status', 'In progress'],
-  ['Where', 'M.Tech · GITAM University'],
-  ['Approach', 'Meta-learning · Few-shot learning'],
-  ['Domain', 'Medical imaging'],
-  ['Framework', 'PyTorch'],
-];
+export const researchFacts = [['Role', 'Data Scientist · Researcher · AI/ML Engineer'], ['Education', 'M.Tech in Data Science · GITAM University'], ['Location', 'Hyderabad, India']];
 
 export const faqs = [
-  { id: 'roles', q: 'What kind of roles are you looking for?', a: 'Research internships and full-time roles in data science, ML engineering, Gen AI and data analytics, including computer vision, medical imaging and data analyst positions. Remote, hybrid or onsite.' },
-  { id: 'research', q: 'What is your M.Tech research about?', a: 'Cross-domain few-shot learning for histopathology images: how models can learn from limited labelled data and transfer that learning across image domains. It is active research at GITAM University.' },
+  { id: 'roles', q: 'What kind of roles are you looking for?', a: 'Research internships and full-time roles in data science, ML engineering, Gen AI and data analytics, including computer vision, software engineering and data analyst positions. Remote, hybrid or onsite.' },
+  { id: 'research', q: 'What is your professional background?', a: 'I am a data scientist, researcher and AI/ML engineer pursuing an M.Tech in Data Science at GITAM University, Hyderabad.' },
   { id: 'tools', q: 'Which tools do you work with most?', a: 'Python with PyTorch, TensorFlow, Keras, scikit-learn and OpenCV for modelling; SQL, Flask and Django for data and services; and Docker, AWS, Power BI and Tableau to make the work useful beyond the notebook. AI assistants such as Claude, Codex and Manus are part of my toolkit too.' },
   { id: 'demos', q: 'Can I try your projects or read the code?', a: 'Miracle and Telex have downloadable preview builds and source links in the Apps section. Several ML projects have a live demo or a source link on their card: EduSentinel, Smart Energy Grids, MRS by Letterboxd, Real-Time Face Detection and Galaxy Glide. Each card also has project notes with more detail.' },
   { id: 'publications', q: 'Where can I read your publications?', a: 'Two papers were published on ResearchGate in December 2024: Real-Time Face Detection Using OpenCV, and EduSentinel: Anomaly Detection in Education Using a Deep Autoencoder. You will find them under Research & publications.' },

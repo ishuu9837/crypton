@@ -4,7 +4,7 @@ import './portfolio.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ishuu.me'),
-  title: 'Y Eswar — App Maker, Data Scientist & ML Engineer',
+  title: 'Y Eswar — Data Scientist, Researcher & AI/ML Engineer',
   description: 'Y Eswar builds Miracle and Telex, native desktop apps with local processing, alongside AI pipelines and deep learning research. M.Tech Data Science researcher at GITAM University, Hyderabad.',
   alternates: { canonical: 'https://ishuu.me' },
   openGraph: { title: 'Y Eswar · Apps, data & research', description: 'Native desktop apps, useful tools and machine learning research by Y Eswar.', url: 'https://ishuu.me', type: 'website' },
@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const person = { '@context': 'https://schema.org', '@type': 'Person', name: 'Y Eswar', url: 'https://ishuu.me', jobTitle: 'Data Scientist & ML Engineer', email: 'founder@ishuu.me', sameAs: ['https://github.com/ishuu9837','https://www.linkedin.com/in/eswar854/','https://www.instagram.com/ishuu.me/'], address: { '@type': 'PostalAddress', addressLocality: 'Hyderabad', addressRegion: 'Telangana', addressCountry: 'IN' } };
-  return <html lang="en" className="light" suppressHydrationWarning><head><link rel="preload" as="image" type="image/jpeg" href="/personal/gallery/9d46b4d538d552c3d163c4cb412bbaf3.jpg" fetchPriority="high"/><link rel="preload" href="/serene/font-3.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/><script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('eswar-serene-theme');document.documentElement.classList.toggle('light',t!=='dark');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){document.documentElement.classList.add('light')}` }} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} /></head><body>{children}</body></html>;
+  return <html lang="en" className="light" suppressHydrationWarning><head><link rel="preload" href="/serene/font-3.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/><script dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('eswar-serene-theme');document.documentElement.classList.toggle('light',t!=='dark');document.documentElement.classList.toggle('dark',t==='dark')}catch(e){document.documentElement.classList.add('light')}` }} /><script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(person) }} /></head><body>{children}</body></html>;
 }
