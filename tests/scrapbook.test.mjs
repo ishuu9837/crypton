@@ -44,3 +44,25 @@ test('floating photos stay reachable after rotating or resizing a phone',async()
  const landscape=floatingLayout(next,0,0,180,844,390);
  assert.ok(landscape.top+landscape.height<=386);
 });
+
+test('unfolding keeps the paper bottom fixed above the prompt',async()=>{
+ const {paperOffset}=await import('../app/scrapbook/scene-state.mjs');
+ for(const height of [240,420,650])for(const open of [0,.1,.4,.75,1]){
+  const bottom=paperOffset(open,height)+(.22+.78*open)*height;
+  assert.ok(Math.abs(bottom-height)<1e-8);
+ }
+});
+test('native page turns have stable resting intervals without scroll snapping',()=>{
+ for(const position of [4,4.1,4.19])assert.deepEqual(pageState(position,7),{index:0,fraction:0});
+ for(const position of [4.81,4.95,5,5.1])assert.deepEqual(pageState(position,7),{index:1,fraction:0});
+ assert.ok(pageState(4.6,7).fraction>pageState(4.4,7).fraction);
+});
+test('chapter navigation matches the shorter intro and reading timeline',async()=>{
+ const {scrollFraction,scrollUnits}=await import('../app/scrapbook/scene-state.mjs');
+ for(const frames of [7,14]){
+  assert.equal(scrollFraction(0,frames),0);
+  assert.equal(scrollFraction(4+frames-1+.35,frames),1);
+  assert.ok(Math.abs(scrollFraction(4,frames)*scrollUnits(frames)-2.5)<1e-8);
+  for(let page=0;page<frames;page++)assert.ok(Math.abs(scrollFraction(4+page,frames)*scrollUnits(frames)-(2.5+page*.85))<1e-8);
+ }
+});

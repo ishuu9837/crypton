@@ -144,3 +144,12 @@
 .sb-scene[data-layout=single] .sb-book-world:before{content:'';position:absolute;inset:-2.6% -2.45%;background:#6b2431;border-radius:5px;opacity:var(--book-open,0);box-shadow:0 3px #c4beae,0 6px #e8e1d0}
 .sb-approved-piece:has(.sb-drag-placeholder) .sb-approved-link{display:none}
 @media(max-width:700px){.sb-controls{bottom:38px}.sb-book-controls{align-items:center;flex-direction:row;justify-content:center}}
+/* A shared safe stage keeps both newspaper and book clear of the prompt. */
+.sb-scene{--sb-stage-top:94px;--sb-stage-bottom:150px;--sb-stage-height:calc(100svh - var(--sb-stage-top) - var(--sb-stage-bottom));--sb-content-height:calc(var(--sb-stage-height) * .85)}
+.sb-stage{position:absolute;left:0;right:0;top:var(--sb-stage-top);bottom:var(--sb-stage-bottom)}
+.sb-stage .sb-newspaper{top:50%;width:min(650px,78vw,calc(var(--sb-content-height) * .78))}
+.sb-stage .sb-book-world{top:50%;width:min(1190px,86vw,calc(var(--sb-content-height) * 1.71712));height:auto;aspect-ratio:1384/806}
+.sb-scene[data-layout=single] .sb-stage .sb-book-world{top:50%;width:min(520px,90vw,calc(var(--sb-content-height) * .85856));height:auto;aspect-ratio:692/806}
+.sb-controls{bottom:58px}.sb-intro-hint{padding-top:8px}.sb-desk-label{display:none}
+@media(max-width:700px){.sb-scene{--sb-stage-top:76px;--sb-stage-bottom:134px}.sb-stage .sb-newspaper{width:min(89vw,calc(var(--sb-content-height) * .78))}.sb-controls{bottom:52px}.sb-intro-hint>span{font-size:20px}}
+@media(max-height:500px){.sb-scene{--sb-stage-top:58px;--sb-stage-bottom:110px}.sb-controls{bottom:35px}.sb-intro-hint>span{font-size:17px}.sb-intro-hint p{font-size:8px}.sb-desk-caption{display:none}}
