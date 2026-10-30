@@ -66,3 +66,14 @@ test('chapter navigation matches the shorter intro and reading timeline',async()
   for(let page=0;page<frames;page++)assert.ok(Math.abs(scrollFraction(4+page,frames)*scrollUnits(frames)-(2.5+page*.85))<1e-8);
  }
 });
+
+import {stageLayout} from '../app/scrapbook/scene-state.mjs';
+test('paper and book fit the safe stage on phone and Safari desktop sizes',()=>{
+ for(const [width,height,single] of [[390,510,true],[667,220,true],[1709,736,false],[1280,456,false]]){
+  const size=stageLayout(width,height,single);
+  assert.ok(size.bookHeight<=height*.85+.001);
+  assert.ok(size.paperHeight<=height*.85+.001);
+  assert.ok(size.bookWidth<=width*.9);
+  assert.ok(size.paperWidth<=width*.9);
+ }
+});

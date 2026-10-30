@@ -8,7 +8,7 @@ import { type Positions } from './draggable';
 import { ApprovedCover } from './approved-design';
 import { PaperAudio } from './paper-audio';
 import { chapters } from './content';
-import { pageState, layoutPosition, scrollUnits, scrollFraction, paperOffset } from './scene-state.mjs';
+import { pageState, layoutPosition, scrollUnits, scrollFraction, paperOffset, stageLayout } from './scene-state.mjs';
 import { Newspaper } from './newspaper';
 import './scrapbook.css';
 const clamp=(v:number)=>Math.min(1,Math.max(0,v));
@@ -27,6 +27,15 @@ export default function ScrapbookExperience(){
     const total=4+frames-1+.35;let current=-1,last=0,lastPhase='',lastTurn='';
     const ctx=gsap.context(()=>{
       if(!reduced&&!arrived.current){arrived.current=true;gsap.fromTo('.sb-news-arrival',{y:-innerHeight},{y:0,duration:1.1,ease:'power3.out'});}
+      const measure=()=>{
+        const area=stageArea.current!.getBoundingClientRect();
+        const size=stageLayout(area.width,area.height,mobile);
+        // Explicit dimensions avoid WebKit's percentage-height/intrinsic SVG cycle.
+        gsap.set(book.current,{width:size.bookWidth,height:size.bookHeight,xPercent:-50,yPercent:-50});
+        gsap.set(paper.current,{width:size.paperWidth,xPercent:-50,yPercent:-50});
+        gsap.set(sheet.current,{height:size.paperHeight,minHeight:0});
+      };
+      measure();
       const proxy={value:0};
       let anchor={x:0,y:100,scale:.3};
       const render=()=>{
@@ -58,12 +67,16 @@ export default function ScrapbookExperience(){
         stage.style.setProperty('--book-open',String(clamp(opening*5)));
         stage.style.setProperty('--turn',String(fraction));stage.style.setProperty('--reading',String(reading));
         stage.dataset.turning=turning?'true':'false';
-        if(flipper.current)gsap.set(flipper.current,{rotationY:reduced?0:-180*fraction,opacity:turning?(reduced?1-fraction:1):0,visibility:turning?'visible':'hidden'});
+        if(flipper.current){
+          gsap.set(flipper.current,{rotationY:reduced?0:-180*fraction,opacity:turning?(reduced?1-fraction:1):0,visibility:turning?'visible':'hidden'});
+          gsap.set(flipper.current.querySelector('.sb-flip-front'),{visibility:turning&&(reduced||fraction<.5)?'visible':'hidden'});
+          gsap.set(flipper.current.querySelector('.sb-flip-back'),{visibility:turning&&!reduced&&fraction>=.5?'visible':'hidden'});
+        }
         const direction=v>=last?'forward':'back';
         if(v>=4&&Math.abs(v-last)>.0001&&turning){const key=`${index}-${direction}`;if(lastTurn!==key){audio.current?.turn(direction==='back');lastTurn=key;}}
         if(!turning)lastTurn='';last=v;
       };
-      const tween=gsap.timeline({scrollTrigger:{trigger:root.current,start:'top top',end:'bottom bottom',scrub:reduced?true:.18,invalidateOnRefresh:true,onRefresh:render}})
+      const tween=gsap.timeline({scrollTrigger:{trigger:root.current,start:'top top',end:'bottom bottom',scrub:reduced?true:.18,invalidateOnRefresh:true,onRefresh:()=>{measure();render();}}})
         .fromTo(proxy,{value:0},{value:4,duration:2.5,ease:'none',onUpdate:render})
         .fromTo(proxy,{value:4},{value:total,duration:(frames-1+.35)*.85,ease:'none',immediateRender:false,onUpdate:render});
       snapTrigger.current=tween.scrollTrigger;
@@ -81,7 +94,7 @@ export default function ScrapbookExperience(){
   const pages=(index:number,replica=false)=>mobile?<BookPage number={index} positions={positions} replica={replica} onDrag={drag}/>:<><BookPage number={index*2} positions={positions} replica={replica} onDrag={drag}/><BookPage number={index*2+1} positions={positions} replica={replica} onDrag={drag}/></>;
   return <main className="scrapbook-experience" ref={root} style={{height:`${(1+scrollUnits(frames))*100}svh`}}>
     <a className="sb-skip" href="#book-controls" onClick={e=>{e.preventDefault();go.current(4);}}>Skip to portfolio</a>
-    <div className="sb-scene" ref={scene} data-phase={phase} data-layout={mobile?'single':'spread'} data-design-revision="spacing-07">
+    <div className="sb-scene" ref={scene} data-phase={phase} data-layout={mobile?'single':'spread'} data-design-revision="safari-08">
       <header className="sb-topbar"><a href="/" className="sb-wordmark">ishuu.me</a><div className="sb-top-actions"><button onClick={()=>setReduced(!reduced)} aria-pressed={reduced}>{reduced?'Motion: quiet':'Motion: full'}</button><button onClick={unlock} aria-label={sound?'Mute page sounds':'Enable page sounds'} aria-pressed={sound}>{sound?<Volume2 size={15}/>:<VolumeX size={15}/>}<span>{sound?'Sound on':'Enable sound'}</span></button></div></header>
       <div className="sb-stage" ref={stageArea}>
       <div className="sb-newspaper" ref={paper}><Newspaper sheetRef={sheet} foldRef={roller} bookPrintRef={bookPrint} onEnter={()=>go.current(4)}/></div>
@@ -91,7 +104,7 @@ export default function ScrapbookExperience(){
         
         <div className="sb-book-inner" key={`${mobile}-${reset}`}>
           <div className="sb-spread sb-base" inert={phase!=='book'}>{pages(pageFrame)}</div>
-          {pageFrame<frames-1&&<div className="sb-spread sb-reveal" aria-hidden="true" inert>{pages(pageFrame+1,true)}</div>}
+          {pageFrame<frames-1&&<div className="sb-spread sb-reveal" aria-hidden="true" inert><BookPage number={mobile?pageFrame+1:(pageFrame+1)*2+1} positions={positions} replica/></div>}
           {pageFrame<frames-1&&<div className="sb-flipper" ref={flipper} aria-hidden="true" inert><div className="sb-flip-front"><BookPage number={mobile?pageFrame:pageFrame*2+1} positions={positions} replica/></div><div className="sb-flip-back"><BookPage number={mobile?pageFrame+1:(pageFrame+1)*2} positions={positions} replica/></div></div>}
         </div>
         <div className="sb-cover sb-approved-cover" ref={cover} data-page="cover"><ApprovedCover positions={positions} onDrag={drag}/></div>
