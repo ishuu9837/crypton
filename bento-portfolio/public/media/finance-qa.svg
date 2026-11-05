@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520">
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#101d25"/><stop offset="1" stop-color="#0a1219"/></linearGradient>
+    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0v28" fill="none" stroke="#37505b" stroke-opacity=".42"/></pattern>
+  </defs>
+  <rect width="880" height="520" fill="url(#bg)"/>
+  <rect width="880" height="520" fill="url(#grid)"/>
+  <path d="M60 389l92-52 80 18 96-76 110 31 89-76 89 26 98-71 103 15" fill="none" stroke="#6597a7" stroke-width="2"/>
+  <g fill="#b2e9d2" stroke="#b2e9d2"><circle cx="152" cy="337" r="5"/><circle cx="328" cy="279" r="5"/><circle cx="527" cy="234" r="5"/><circle cx="714" cy="189" r="5"/></g>
+  <rect x="98" y="77" width="360" height="158" rx="22" fill="#152c37" stroke="#618799"/>
+  <path d="m134 234 2 30 36-30" fill="#152c37" stroke="#618799"/>
+  <rect x="499" y="300" width="281" height="146" rx="22" fill="#233a38" stroke="#8bc6a8"/>
+  <path d="m741 445-2 27-32-27" fill="#233a38" stroke="#8bc6a8"/>
+  <g font-family="monospace"><text x="130" y="121" fill="#93bccb" font-size="16" letter-spacing="3">01 / INPUT</text><text x="130" y="174" fill="#ebf3f8" font-size="27">Finance question</text><text x="531" y="344" fill="#a0dcb9" font-size="16" letter-spacing="3">02 / ADAPTER</text><text x="531" y="395" fill="#eef8f0" font-size="26">Llama + LoRA</text></g>
+</svg>

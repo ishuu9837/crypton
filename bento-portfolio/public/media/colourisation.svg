@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520">
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#3f536f"/><stop offset="1" stop-color="#f0a67b"/></linearGradient>
+    <clipPath id="mono"><path d="M0 0h440v520H0z"/></clipPath>
+    <filter id="gray"><feColorMatrix type="saturate" values="0"/></filter>
+    <g id="scene">
+      <rect width="880" height="520" fill="url(#sky)"/>
+      <circle cx="440" cy="224" r="82" fill="#ffe1a1"/>
+      <path d="M0 409 141 284l86 53 163-117 103 94 96-71 291 154v123H0z" fill="#3e616c"/>
+      <path d="M0 440 146 377l112 35 152-78 135 62 146-58 189 83v99H0z" fill="#254852"/>
+      <path d="M0 478 204 435l175 33 173-38 328 45v45H0z" fill="#142c3c"/>
+    </g>
+  </defs>
+  <use href="#scene"/>
+  <g clip-path="url(#mono)" filter="url(#gray)"><use href="#scene"/></g>
+  <path d="M440 0v520" stroke="#fff" stroke-width="2" opacity=".72"/>
+  <circle cx="440" cy="260" r="19" fill="#f3f0eb"/>
+  <path d="m436 254-6 6 6 6m8-12 6 6-6 6" fill="none" stroke="#1c2e3c" stroke-width="2"/>
+  <g font-family="monospace" font-size="15" fill="#fff" letter-spacing="3"><text x="32" y="42">L / GRAYSCALE</text><text x="848" y="42" text-anchor="end">AB / COLOUR</text></g>
+</svg>
