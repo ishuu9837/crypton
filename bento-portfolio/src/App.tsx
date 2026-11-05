@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
-import { ArrowDown, ArrowRight, ArrowUpRight, ChevronDown, Github, Linkedin, Mail, MapPin, Moon, Play, Sun, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail, MapPin, Moon, Play, Sun, Volume2, VolumeX, X } from "lucide-react";
 import { Intro, shouldShowIntro } from "./Intro";
 import type { IntroPlayer } from "./Intro";
 import { Board, BoardPiece } from "./Board";
@@ -40,35 +40,18 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
     transition: { duration: reduced ? 0 : .65, delay: reduced ? 0 : delay, ease: easing },
   });
   const nextTheme = theme === "dark" ? "light" : "dark";
-  const notch = useRef<HTMLDetailsElement>(null);
-
-  function closeNotch(restoreFocus = false) {
-    if (!notch.current) return;
-    notch.current.open = false;
-    if (restoreFocus) notch.current.querySelector("summary")?.focus();
-  }
 
   return (
     <section className="hero" id="home" aria-labelledby="hero-heading">
       <motion.header className="hero-header" {...entrance(0, -12)}>
         <a className="site-name" href="#home" aria-label="ishuu.me home">ishuu.me</a>
-        <details className="mac-notch" ref={notch} onBlur={event => {
-          if (!event.currentTarget.contains(event.relatedTarget)) closeNotch();
-        }} onKeyDown={event => {
-          if (event.key === "Escape" && notch.current?.open) {
-            event.preventDefault();
-            closeNotch(true);
-          }
-        }}>
-          <summary><span className="notch-lens" aria-hidden="true" /><span className="notch-label">Menu <ChevronDown size={13} aria-hidden="true" /></span></summary>
-          <nav className="notch-stack" aria-label="Primary">
-            {nav.map(([label, href]) => <a key={href} href={href} onClick={() => closeNotch(true)}>{label} <ArrowUpRight size={14} aria-hidden="true" /></a>)}
-            <button className="white-button" type="button" onClick={() => { closeNotch(true); onReplay(); }} aria-label="Replay intro">
-              <Play size={15} aria-hidden="true" /> Replay
-            </button>
-          </nav>
-        </details>
+        <nav className="hero-nav" aria-label="Primary">
+          {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+        </nav>
         <div className="header-controls">
+          <button className="white-button header-replay" type="button" onClick={onReplay} aria-label="Replay intro">
+            <Play size={15} aria-hidden="true" /> Replay
+          </button>
           <button className="white-button icon-button" type="button" onClick={onSoundChange}
             aria-label="Replay sound" aria-pressed={sound} title={sound ? "Replay sound on" : "Replay sound off"}>
             {sound ? <Volume2 size={17} aria-hidden="true" /> : <VolumeX size={17} aria-hidden="true" />}
