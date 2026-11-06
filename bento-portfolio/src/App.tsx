@@ -153,14 +153,14 @@ function About() {
       <div className="about-center" id="focus">
         <p className="micro about-kicker">Data science &amp; applied AI <span>· Hyderabad, India</span></p>
         <h2>I build <em>AI tools</em> for real problems.</h2>
-        <p>I'm an <strong>AI/ML engineer</strong> pursuing an M.Tech in Data Science at GITAM University. I work with AI agents, language models, and computer vision.</p>
-        <p>My work spans <AboutPreview name="EduSentinel">EduSentinel</AboutPreview>,{" "}
-          <AboutPreview name="MRS by Letterboxd">film recommendations</AboutPreview>,{" "}
-          <AboutPreview name="Smart Energy Grid">energy forecasting</AboutPreview>, and{" "}
-          <AboutPreview name="Few-Shot Medical Image Classification">few-shot medical imaging</AboutPreview>.
+        <p>I'm an <strong>AI/ML engineer</strong> pursuing an M.Tech in Data Science at GITAM University. I build with AI agents, language models, deep learning, and computer vision, taking ideas from a first experiment toward useful, working tools.</p>
+        <p>My work ranges from <AboutPreview name="EduSentinel">EduSentinel</AboutPreview>, which uses anomaly detection to surface unusual learning patterns, to{" "}
+          <AboutPreview name="MRS by Letterboxd">film recommendations</AboutPreview> shaped by language, year, and genre. I also explore{" "}
+          <AboutPreview name="Smart Energy Grid">energy forecasting</AboutPreview> and, in my current research,{
+          " "}<AboutPreview name="Few-Shot Medical Image Classification">few-shot medical imaging</AboutPreview>—learning from a small set of labelled examples.
         </p>
-        <p>I'm also building <AboutPreview name="Miracle Website">Miracle</AboutPreview> for file conversion and{" "}
-          <AboutPreview name="Telex Website">Telex</AboutPreview>, a Mac teleprompter.</p>
+        <p>Alongside machine learning, I'm building practical desktop tools: <AboutPreview name="Miracle Website">Miracle</AboutPreview> brings image, video, audio, and document conversion to your computer, while{" "}
+          <AboutPreview name="Telex Website">Telex</AboutPreview> is a Mac teleprompter for comfortable script reading.</p>
         <p className="about-hint">Hover or tap an underline to preview my work.</p>
       </div>
       <img className="about-portrait" src="/media/ish-at-work-cutout.png"
