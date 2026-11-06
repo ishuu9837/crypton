@@ -121,6 +121,9 @@ html:has(.project-dialog[open]){overflow:hidden}
 
 /* Supporting sections */
 .profile-section{padding:clamp(24px,4svh,48px) clamp(12px,1.65vw,28px) 0}
+:root[data-theme="dark"] .profile-section:not(.contact-section){
+  --surface:#080808;--raised:#151515;--tinted:#101010;--line:#303030
+}
 .profile-heading{border-top:1px solid var(--line);padding-top:24px;margin-bottom:clamp(25px,4vw,51px)}
 .profile-heading .micro{display:block;color:var(--muted);margin-bottom:8px;font-size:10px}
 .research-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(10px,1.8vw,24px)}
@@ -135,7 +138,9 @@ html:has(.project-dialog[open]){overflow:hidden}
 /* Scrapbook boards and credentials */
 .board-card .profile-heading{border:0;padding:0;margin-bottom:10px}
 .board-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:13px;color:var(--muted);font-size:14px}
-.dot-board{position:relative;isolation:isolate;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:radial-gradient(circle,var(--board-dot) 1px,transparent 1.6px) 1px 1px/18px 18px,var(--tinted)}
+.dot-board{position:relative;isolation:isolate;overflow:hidden;border:1px solid var(--line);border-radius:16px;background:radial-gradient(circle,var(--board-dot) var(--board-dot-size,1px),transparent var(--board-dot-edge,1.6px)) 1px 1px/18px 18px,var(--tinted)}
+:root[data-theme="dark"] #gallery .dot-board{--tinted:#050505;--board-dot:#c8b594}
+:root[data-theme="light"] #gallery .dot-board{--board-dot:#111;--board-dot-size:.6px;--board-dot-edge:1px}
 .board-piece{position:relative;cursor:grab;touch-action:none;user-select:none}
 .board-piece:active{cursor:grabbing}
 .board-piece:focus-visible{outline:2px solid var(--focus-ring);outline-offset:2px}
