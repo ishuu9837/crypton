@@ -2,15 +2,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
-import { ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail, MapPin, Moon, Play, Sun, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail, MapPin, Play, Volume2, VolumeX, X } from "lucide-react";
 import { Intro, shouldShowIntro } from "./Intro";
 import type { IntroPlayer } from "./Intro";
 import { Board, BoardPiece } from "./Board";
+import { PortfolioNav } from "./PortfolioNav";
+import { ShaderFlow } from "./ShaderFlow";
 import { about, certifications, email, focus, gallery, github, linkedin, previews, projects, toolkit } from "./content";
 import type { Project } from "./content";
 
 const easing = [0.25, 0.1, 0.25, 1] as const;
-const nav = [["Projects", "#projects"], ["Skills", "#toolkit"], ["Gallery", "#gallery"], ["Contact", "#contact"]];
+const sectionLinks = [["Skills", "#toolkit"], ["Gallery", "#gallery"], ["Contact", "#contact"]];
 type Theme = "dark" | "light";
 
 function ContactButton({ href = "#contact" }: { href?: string }) {
@@ -39,14 +41,17 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
     animate: { opacity: 1, y: 0 },
     transition: { duration: reduced ? 0 : .65, delay: reduced ? 0 : delay, ease: easing },
   });
-  const nextTheme = theme === "dark" ? "light" : "dark";
 
   return (
     <section className="hero" id="home" aria-labelledby="hero-heading">
+      <div className="hero-flow" aria-hidden="true">
+        <ShaderFlow className="hero-flow-canvas" brightness={3} iterations={10} flowSpeed={[0, .1]} fadeRx={5} />
+      </div>
+      <PortfolioNav theme={theme} onThemeChange={onThemeChange} />
       <motion.header className="hero-header" {...entrance(0, -12)}>
         <a className="site-name" href="#home" aria-label="ishuu.me home">ishuu.me</a>
-        <nav className="hero-nav" aria-label="Primary">
-          {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+        <nav className="hero-nav" aria-label="Portfolio sections">
+          {sectionLinks.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
         </nav>
         <div className="header-controls">
           <button className="white-button header-replay" type="button" onClick={onReplay} aria-label="Replay intro">
@@ -55,9 +60,6 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
           <button className="white-button icon-button" type="button" onClick={onSoundChange}
             aria-label="Replay sound" aria-pressed={sound} title={sound ? "Replay sound on" : "Replay sound off"}>
             {sound ? <Volume2 size={17} aria-hidden="true" /> : <VolumeX size={17} aria-hidden="true" />}
-          </button>
-          <button className="theme-toggle white-button icon-button" type="button" onClick={onThemeChange} aria-label={"Switch to " + nextTheme + " mode"}>
-            {theme === "dark" ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
           </button>
         </div>
       </motion.header>
@@ -354,7 +356,7 @@ export function App() {
 
   function toggleTheme() {
     const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
+      setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#000000" : "#f7f7f7");
     try { localStorage.setItem("eswar-theme", nextTheme); } catch {}
