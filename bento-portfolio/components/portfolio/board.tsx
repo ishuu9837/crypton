@@ -1,10 +1,13 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import type { ReactNode, RefObject } from "react";
-import { motion, useMotionValue } from "framer-motion";
+import { motion, useMotionValue } from "motion/react";
 import { RotateCcw } from "lucide-react";
+import { DottedPattern } from "@/components/ui/dotted-pattern";
 
 export function Board({ children, name }: {
-  children: (bounds: RefObject<HTMLDivElement>) => ReactNode;
+  children: (bounds: RefObject<HTMLDivElement | null>) => ReactNode;
   name: string;
 }) {
   const bounds = useRef<HTMLDivElement>(null);
@@ -26,11 +29,12 @@ export function Board({ children, name }: {
     <>
       <div className="board-toolbar">
         <p id={name + "-hint"}>Drag the pieces or focus one and use the arrow keys.</p>
-        <button className="white-button" type="button" onClick={() => setVersion(v => v + 1)}>
+        <button className="portfolio-button" type="button" onClick={() => setVersion(v => v + 1)}>
           <RotateCcw size={14} aria-hidden="true" /> Reset layout
         </button>
       </div>
       <div className="dot-board" ref={bounds}>
+        <DottedPattern size={18} className="pointer-events-none absolute inset-0" />
         <div key={version}>{children(bounds)}</div>
       </div>
     </>
@@ -38,7 +42,7 @@ export function Board({ children, name }: {
 }
 
 export function BoardPiece({ bounds, label, board, className, children }: {
-  bounds: RefObject<HTMLDivElement>;
+  bounds: RefObject<HTMLDivElement | null>;
   label: string;
   board: string;
   className: string;
@@ -47,7 +51,7 @@ export function BoardPiece({ bounds, label, board, className, children }: {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const [raised, setRaised] = useState(false);
-  const drag = useRef<{ pointer: number; x: number; y: number; clientX: number; clientY: number }>();
+  const drag = useRef<{ pointer: number; x: number; y: number; clientX: number; clientY: number } | undefined>(undefined);
 
   function move(element: HTMLElement, nextX: number, nextY: number) {
     const board = bounds.current;
@@ -76,7 +80,7 @@ export function BoardPiece({ bounds, label, board, className, children }: {
       onLostPointerCapture={() => { drag.current = undefined; setRaised(false); }}
       onKeyDown={event => {
         if (event.target !== event.currentTarget) return;
-        const direction = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] }[event.key];
+        const direction = ({ ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] } as const)[event.key as "ArrowLeft" | "ArrowRight" | "ArrowUp" | "ArrowDown"];
         if (!direction || !bounds.current) return;
         event.preventDefault();
         move(event.currentTarget, x.get() + direction[0] * 16, y.get() + direction[1] * 16);

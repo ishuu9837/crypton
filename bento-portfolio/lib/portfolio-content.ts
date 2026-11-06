@@ -19,7 +19,7 @@ export const previews = [
   { name: "MRS by Letterboxd", image: "/media/mrs.webp" },
   { name: "Smart Energy Grid", image: "/media/energy.webp" },
   { name: "The Field Notes", image: "/media/portfolio.jpg" },
-];
+] as const;
 
 export type Project = {
   name: string;

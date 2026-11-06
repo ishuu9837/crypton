@@ -1,3 +1,5 @@
+"use client";
+
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
@@ -16,7 +18,7 @@ export const Intro = forwardRef<IntroPlayer, { autoplay: boolean; onFinish: () =
   function Intro({ autoplay, onFinish }, ref) {
     const dialog = useRef<HTMLDialogElement>(null);
     const video = useRef<HTMLVideoElement>(null);
-    const timer = useRef<number>();
+    const timer = useRef<number | undefined>(undefined);
     const run = useRef(0);
     const [muted, setMuted] = useState(true);
 
