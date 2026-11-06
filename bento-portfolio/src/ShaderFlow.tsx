@@ -1,4 +1,4 @@
-"use client";
+// Flow shader adapted from the supplied DavidHDev portfolio components.
 
 import { Mesh, Program, Renderer, Transform, Triangle } from "ogl";
 import { useEffect, useRef, type ReactNode } from "react";
@@ -114,12 +114,12 @@ function parseColor(input: string): [number, number, number] | null {
 
 function readBgColor(el: HTMLElement): [number, number, number] {
   const styles = getComputedStyle(el);
-  const varVal = styles.getPropertyValue("--background").trim();
+  const varVal = styles.getPropertyValue("--black").trim();
   const parsed = varVal ? parseColor(varVal) : null;
   if (parsed) return parsed;
   const probe = document.createElement("div");
   probe.style.cssText =
-    "position:absolute;width:0;height:0;background:var(--background);";
+    "position:absolute;width:0;height:0;background:var(--black);";
   el.appendChild(probe);
   const raw = getComputedStyle(probe).backgroundColor;
   el.removeChild(probe);
@@ -140,7 +140,12 @@ export function ShaderFlow(props: ShaderFlowProps): ReactNode {
 
     let r: Renderer;
     try {
-      r = new Renderer({ dpr: 1, alpha: false, antialias: false, powerPreference: "low-power" });
+      r = new Renderer({
+        dpr: 1,
+        alpha: false,
+        antialias: false,
+        powerPreference: "low-power",
+      });
       if (!r.gl) return;
     } catch {
       return;
@@ -182,11 +187,14 @@ export function ShaderFlow(props: ShaderFlowProps): ReactNode {
     }
 
     el.appendChild(gl.canvas);
+
     const mesh = new Mesh(gl, { geometry: geo, program: p });
     const scene = new Transform();
     mesh.setParent(scene);
 
+    let needsFrame = true;
     const onResize = (): void => {
+      needsFrame = true;
       const w = el.clientWidth;
       const h = el.clientHeight;
       r.setSize(w, h);
@@ -199,7 +207,7 @@ export function ShaderFlow(props: ShaderFlowProps): ReactNode {
 
     let raf = 0;
     let visible = document.visibilityState === "visible";
-    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)");
+    const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
     let onScreen = true;
     const t0 = performance.now();
 
@@ -217,6 +225,7 @@ export function ShaderFlow(props: ShaderFlowProps): ReactNode {
     io.observe(el);
 
     const syncBg = (): void => {
+      needsFrame = true;
       p.uniforms.uBgColor.value = readBgColor(document.documentElement);
     };
     const themeObserver = new MutationObserver(syncBg);
@@ -243,8 +252,9 @@ export function ShaderFlow(props: ShaderFlowProps): ReactNode {
     };
 
     const tick = (): void => {
-      if (visible && onScreen) {
-        p.uniforms.uT.value = reduceMotion.matches ? 0 : (performance.now() - t0) / 1000;
+      if (visible && onScreen && (!reducedMotion.matches || needsFrame)) {
+        needsFrame = false;
+        p.uniforms.uT.value = reducedMotion.matches ? 0 : (performance.now() - t0) / 1000;
         sync();
         r.render({ scene });
       }
