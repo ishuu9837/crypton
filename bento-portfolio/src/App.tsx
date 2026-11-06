@@ -128,11 +128,37 @@ function AboutPreview({ name, children }: { name: string; children: ReactNode })
   );
 }
 
-const aboutPieces = [
+const scrapbookPieces = [
   { image: "/media/iphone-15-plus-blue.png", caption: "Device I use for convo", alt: "Blue iPhone 15 Plus", kind: "phone" },
   { image: "/media/ish-at-work.png", caption: "ISH", alt: "Illustration of Y Eswar working at his laptop", kind: "portrait" },
   { image: "/media/macbook-air-m5-closed.jpg", caption: "Device I use to cook", alt: "Closed MacBook Air with M5 in sky blue", kind: "laptop" },
+  { image: "/media/diet-coke.jpg", caption: "I LOVE TO CONSUME", alt: "Silver Diet Coke can", kind: "drink" },
 ];
+
+function ContactScrapbook() {
+  return (
+    <div className="contact-stage">
+      <img className="contact-landscape" src="/media/contact-landscape.webp" alt="" loading="lazy" decoding="async" />
+      <div className="contact-scrapbook" role="group" aria-label="Personal scrapbook">
+        <Board name="contact-scrapbook" showHint={false}>{bounds => (
+          <div className="scrapbook-pieces">
+            {scrapbookPieces.map(({ image, caption, alt, kind }) => (
+              <BoardPiece key={image} board="contact-scrapbook" bounds={bounds} label={caption}
+                className={"scrapbook-piece scrapbook-" + kind}>
+                <figure>
+                  <div className="scrapbook-artwork">
+                    <img src={image} alt={alt} loading="lazy" decoding="async" draggable={false} />
+                  </div>
+                  <figcaption>{caption}</figcaption>
+                </figure>
+              </BoardPiece>
+            ))}
+          </div>
+        )}</Board>
+      </div>
+    </div>
+  );
+}
 
 function About() {
   return (
@@ -156,23 +182,8 @@ function About() {
         </p>
         <p className="about-hint">Hover or tap the underlined words to preview my work.</p>
       </div>
-      <div className="about-board">
-        <Board name="about-scrapbook" showHint={false}>{bounds => (
-          <div className="about-collage">
-            {aboutPieces.map(({ image, caption, alt, kind }) => (
-              <BoardPiece key={image} board="about-scrapbook" bounds={bounds} label={caption}
-                className={"about-piece about-piece-" + kind}>
-                <figure>
-                  <div className="about-artwork">
-                    <img src={image} alt={alt} decoding="async" draggable={false} />
-                  </div>
-                  <figcaption>{caption}</figcaption>
-                </figure>
-              </BoardPiece>
-            ))}
-          </div>
-        )}</Board>
-      </div>
+      <img className="about-portrait" src="/media/ish-at-work-cutout.png"
+        alt="Illustration of Y Eswar working at his laptop" width={1254} height={1254} decoding="async" />
     </div>
   );
 }
@@ -358,7 +369,7 @@ function Contact() {
             <a href={twitter}><Twitter size={17} aria-hidden="true" /> X / Twitter</a>
           </div>
         </div>
-        <img className="contact-landscape" src="/media/contact-landscape.webp" alt="" loading="lazy" decoding="async" />
+        <ContactScrapbook />
       </div>
       <p className="site-credit">MADE BY I⚡️H</p>
     </footer>
