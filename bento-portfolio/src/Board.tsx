@@ -3,9 +3,10 @@ import type { ReactNode, RefObject } from "react";
 import { motion, useMotionValue } from "framer-motion";
 import { RotateCcw } from "lucide-react";
 
-export function Board({ children, name }: {
+export function Board({ children, name, showHint = true }: {
   children: (bounds: RefObject<HTMLDivElement>) => ReactNode;
   name: string;
+  showHint?: boolean;
 }) {
   const bounds = useRef<HTMLDivElement>(null);
   const [version, setVersion] = useState(0);
@@ -25,9 +26,10 @@ export function Board({ children, name }: {
   return (
     <>
       <div className="board-toolbar">
-        <p id={name + "-hint"}>Drag the pieces or focus one and use the arrow keys.</p>
-        <button className="white-button" type="button" onClick={() => setVersion(v => v + 1)}>
-          <RotateCcw size={14} aria-hidden="true" /> Reset layout
+        <p id={name + "-hint"} className={showHint ? undefined : "sr-only"}>Drag the pieces or focus one and use the arrow keys.</p>
+        <button className="white-button icon-button board-reset" type="button" aria-label="Reset layout" title="Reset layout"
+          onClick={() => setVersion(v => v + 1)}>
+          <RotateCcw size={16} aria-hidden="true" />
         </button>
       </div>
       <div className="dot-board" ref={bounds}>

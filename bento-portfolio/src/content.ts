@@ -1,24 +1,13 @@
 export const email = "founder@ishuu.me";
 export const github = "https://github.com/ishuu9837";
 export const linkedin = "https://www.linkedin.com/in/eswar854/";
+export const instagram = "https://www.instagram.com/ishuu.me/";
+export const twitter = "https://x.com/ishuu4me";
 
-export const about =
-  "I’m Y Eswar, a data scientist, researcher, and AI/ML engineer based in Hyderabad. I’m pursuing an M.Tech in Data Science at GITAM University while building native tools and exploring how machine learning can solve practical problems.";
-
-export const focus = [
-  ["Applied AI", "I explore machine learning through anomaly detection, recommendation systems, and computer vision."],
-  ["Data Science", "I work with data cleaning, validation, statistical analysis, and forecasting."],
-  ["Native Tools", "I’m building Miracle, a file converter, and Telex, a native Mac teleprompter."],
-  ["Product Interfaces", "I build interfaces that make technical workflows easier to use, from research demos to desktop tools."],
-  ["Research", "My projects include work on unusual learning behaviour and real-time face detection with OpenCV."],
-];
-
-export const previews = [
+const previews = [
   { name: "EduSentinel", image: "/media/edusentinel.webp" },
-  { name: "Hark Artifacts", image: "/media/hark.jpg" },
   { name: "MRS by Letterboxd", image: "/media/mrs.webp" },
   { name: "Smart Energy Grid", image: "/media/energy.webp" },
-  { name: "The Field Notes", image: "/media/portfolio.jpg" },
 ];
 
 export type Project = {
@@ -29,17 +18,19 @@ export type Project = {
   detail: string;
   stack: string;
   url?: string;
+  repo?: string;
   linkLabel?: string;
   illustration?: boolean;
 };
 
 export const projects: Project[] = [
   {
-    ...previews[2], category: "Recommendations / Web",
+    ...previews[1], category: "Recommendations / Web",
     overview: "A different route to your next film",
     detail: "A discovery interface with filters for language, year, and genre, backed by cosine-similarity recommendations.",
     stack: "Python · Cosine similarity · Web UI",
     url: "https://movie-recommendation-using-letterbo.vercel.app",
+    repo: github + "/Movie_recommendation_using_letterboxd",
   },
   {
     ...previews[0], category: "Applied ML / Research",
@@ -47,6 +38,7 @@ export const projects: Project[] = [
     detail: "An eight-feature, NumPy-only deep autoencoder flags unusual patterns in LMS data.",
     stack: "NumPy · Flask · Autoencoders",
     url: "https://edusentinel.vercel.app",
+    repo: github + "/edusentinel",
   },
   {
     name: "Hark Design Card", image: "/media/hark.jpg", category: "Product design / Prototype",
@@ -59,18 +51,21 @@ export const projects: Project[] = [
     overview: "A hands-on AI engineering roadmap",
     detail: "The Applied AI Engineer site organizes a 20-day curriculum around practical missions, projects, and progress tracking.",
     stack: "AI engineering · Curriculum · Web app", url: "https://applied-ai-engineer-nu.vercel.app",
+    repo: github + "/applied-ai-engineer",
   },
   {
     name: "Telex Website", image: "/media/telex.jpg", category: "Native tools / Website",
     overview: "A teleprompter that sits near your camera",
     detail: "The site shows how Telex helps Mac users read at their own pace, with continuous scrolling, voice-level pacing, and navigable cues.",
     stack: "macOS · SwiftUI · Teleprompter", url: "https://telex-website-tau.vercel.app",
+    repo: github + "/Telex",
   },
   {
     name: "Previous Portfolio", image: "/media/portfolio.jpg", category: "Personal site / Archive",
     overview: "My portfolio as an interactive scrapbook",
     detail: "An earlier edition of this site, with editorial spreads, draggable details, and a book you can flip through.",
     stack: "Next.js · GSAP · Responsive design", url: "https://portfolio-two-gamma-2vsmutw02j.vercel.app",
+    repo: github + "/portfolio",
     linkLabel: "Open archive",
   },
   {
@@ -78,32 +73,35 @@ export const projects: Project[] = [
     overview: "A playable tour of the solar system",
     detail: "Explore nine worlds, earn points, and answer questions as you fly through the solar system.",
     stack: "HTML · CSS · JavaScript", url: "https://galaxy-glide.vercel.app",
+    repo: github + "/GALAXY-GLIDE",
   },
   {
     name: "Miracle Website", image: "/media/miracle.jpg", category: "Native tools / Website",
     overview: "A home for my desktop file converter",
     detail: "Miracle converts images, video, audio, and documents on your computer. The site introduces the app and points to preview builds.",
     stack: "macOS · Windows · File conversion", url: "https://miracle-three-rho.vercel.app",
+    repo: github + "/Miracle",
   },
   {
-    ...previews[3], category: "Data / Sustainability",
+    ...previews[2], category: "Data / Sustainability",
     overview: "Forecasting a more sustainable grid",
     detail: "A case study on demand forecasting and adaptive power distribution, with an interactive energy-balance demo.",
     stack: "Forecasting · LSTM · Big data",
     url: "https://smart-energy-grid-app.vercel.app",
+    repo: github + "/smart-energy-grid",
   },
   {
     name: "Llama 3.2 Finance QA", image: "/media/finance-qa.svg", category: "Language models / Research",
     overview: "Fine-tuning Llama for finance questions",
     detail: "I used LoRA to adapt Llama 3.2 3B Instruct and compared the fine-tuned model with the base model on held-out answers.",
-    stack: "Llama 3.2 · LoRA · Evaluation", url: "https://github.com/ishuu9837/Fine-tuning-Llama-3.2",
-    linkLabel: "View source", illustration: true,
+    stack: "Llama 3.2 · LoRA · Evaluation", repo: github + "/Fine-tuning-Llama-3.2",
+    illustration: true,
   },
   {
     name: "Image Colourisation", image: "/media/colourisation.svg", category: "Computer vision / Research",
     overview: "Adding colour to grayscale images",
     detail: "A convolutional U-Net reconstructs colour in LAB colour space using CIFAR-10 and a VGG perceptual loss.",
-    stack: "PyTorch · U-Net · CIFAR-10", illustration: true,
+    stack: "PyTorch · U-Net · CIFAR-10", repo: github + "/IMAGE-COLORIZATION", illustration: true,
   },
 ];
 

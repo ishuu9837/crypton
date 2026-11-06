@@ -1,21 +1,16 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import type { MotionValue } from "framer-motion";
-import { ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail, MapPin, Moon, Play, Sun, Volume2, VolumeX, X } from "lucide-react";
+import { motion, useInView, useReducedMotion } from "framer-motion";
+import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, Moon, Play, Sun, Twitter, Volume2, VolumeX, X } from "lucide-react";
 import { Intro, shouldShowIntro } from "./Intro";
 import type { IntroPlayer } from "./Intro";
 import { Board, BoardPiece } from "./Board";
-import { about, certifications, email, focus, gallery, github, linkedin, previews, projects, toolkit } from "./content";
+import { certifications, email, gallery, github, instagram, linkedin, projects, toolkit, twitter } from "./content";
 import type { Project } from "./content";
 
 const easing = [0.25, 0.1, 0.25, 1] as const;
 const nav = [["Projects", "#projects"], ["Skills", "#toolkit"], ["Gallery", "#gallery"], ["Contact", "#contact"]];
 type Theme = "dark" | "light";
-
-function ContactButton({ href = "#contact" }: { href?: string }) {
-  return <a className="contact-button" href={href}>Contact me <ArrowUpRight aria-hidden="true" size={17} /></a>;
-}
 
 function Reveal({ children, className, delay = 0, x = 0, y = 30 }: {
   children: ReactNode; className?: string; delay?: number; x?: number; y?: number;
@@ -64,119 +59,121 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
           </div>
         </div>
       </motion.header>
-      <div className="hero-layout">
-        <motion.div className="hero-copy" {...entrance(.12, 19)}>
-          <p className="hero-eyebrow"><span /> Data science &amp; applied AI</p>
-          <h1 id="hero-heading">Hi, I’m<br />{" "}<em>Eswar.</em></h1>
-          <p className="hero-introduction">I work with data, train models, and build apps for the things I wish were easier.</p>
-          <div className="hero-actions">
-            <a className="hero-work" href="#projects">See my work <ArrowDown size={16} aria-hidden="true" /></a>
-            <a className="hero-about" href="#about">About me <ArrowUpRight size={15} aria-hidden="true" /></a>
-          </div>
-        </motion.div>
-        <motion.figure className="hero-photo" {...entrance(.24, 22)}>
-          <div className="portrait-field">
-            <img className="portrait-img" src="/media/eswar-anime.jpg" alt="Illustrated portrait of Y Eswar" width={2048} height={2048} />
-          </div>
-          <figcaption><span>Y ESWAR</span><span><MapPin size={14} aria-hidden="true" /> Hyderabad, India</span></figcaption>
-        </motion.figure>
-      </div>
+      <About />
     </section>
   );
 }
 
-const rows = [
-  previews,
-  [previews[2], previews[4], previews[1], previews[3], previews[0]],
-];
+function AboutPreview({ name, children }: { name: string; children: ReactNode }) {
+  const project = projects.find(item => item.name === name);
+  const id = useId();
+  const anchor = useRef<HTMLSpanElement>(null);
+  const trigger = useRef<HTMLButtonElement>(null);
+  const [mode, setMode] = useState<"hover" | "focus" | "pinned" | null>(null);
+  const [offset, setOffset] = useState(0);
+  const [above, setAbove] = useState(false);
+  const open = mode !== null;
 
-function Marquee() {
-  const section = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: section, offset: ["start end", "end start"] });
-  const right = useTransform(scrollYProgress, [0, 1], [-620, -150]);
-  const left = useTransform(scrollYProgress, [0, 1], [-100, -610]);
-  const reduced = useReducedMotion();
+  useEffect(() => {
+    if (!open) return;
+    function dismissOutside(event: PointerEvent) {
+      if (event.target instanceof Node && !anchor.current?.contains(event.target)) setMode(null);
+    }
+    function dismissWithEscape(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      if (anchor.current?.contains(document.activeElement)) trigger.current?.focus();
+      setMode(null);
+    }
+    function placePreview() {
+      const rect = anchor.current?.getBoundingClientRect();
+      if (!rect) return;
+      const viewport = document.documentElement.clientWidth;
+      const halfWidth = Math.min(148, (viewport - 32) / 2);
+      const middle = (rect.left + rect.right) / 2;
+      const center = Math.max(halfWidth + 16, Math.min(viewport - halfWidth - 16, middle));
+      setOffset(center - middle);
+      setAbove(rect.bottom > window.innerHeight - 270 && rect.top > 270);
+    }
+    placePreview();
+    window.addEventListener("pointerdown", dismissOutside);
+    window.addEventListener("keydown", dismissWithEscape);
+    window.addEventListener("resize", placePreview);
+    return () => {
+      window.removeEventListener("pointerdown", dismissOutside);
+      window.removeEventListener("keydown", dismissWithEscape);
+      window.removeEventListener("resize", placePreview);
+    };
+  }, [open]);
+
+  if (!project) return children;
   return (
-    <section className="marquee" ref={section} aria-label="Project previews">
-      <div className="marquee-label"><span>01 / PROJECT INDEX</span><a href="#projects">Selected work <ArrowDown size={14} aria-hidden="true" /></a></div>
-      {rows.map((row, index) => (
-        <motion.div key={index} className="marquee-row" style={{ x: reduced ? 0 : index === 0 ? right : left }}>
-          {[...row, ...row, ...row].map((project, i) => (
-            <img key={i} src={project.image} alt={i < row.length && index === 0 ? project.name : ""}
-              width={420} height={270} loading="lazy" decoding="async" />
-          ))}
-        </motion.div>
-      ))}
-    </section>
+    <span className="about-preview" ref={anchor}
+      onPointerEnter={event => { if (event.pointerType === "mouse") setMode(current => current ?? "hover"); }}
+      onPointerLeave={() => setMode(current => current === "hover" ? null : current)}
+      onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setMode(null); }}>
+      <button type="button" ref={trigger} aria-expanded={open} aria-controls={id}
+        onFocus={event => { if (event.currentTarget.matches(":focus-visible")) setMode("focus"); }}
+        onClick={() => setMode(current => current === "pinned" ? null : "pinned")}>
+        {children}
+      </button>
+      <span id={id} hidden={!open} className="about-popover" data-above={above}
+        style={{ left: `calc(50% + ${offset}px)` }}>
+        <a href={project.url ?? project.repo ?? "#projects"} className="about-popover-card">
+          <img src={project.image} alt="" width={272} height={153} loading="lazy" decoding="async" />
+          <span className="about-popover-title">{project.name} <ArrowUpRight size={15} aria-hidden="true" /></span>
+          <span className="about-popover-note">{project.overview}</span>
+        </a>
+      </span>
+    </span>
   );
 }
 
-function Letter({ char, index, total, progress }: { char: string; index: number; total: number; progress: MotionValue<number> }) {
-  const start = index / total * .82;
-  const opacity = useTransform(progress, [start, start + .17], [.25, 1]);
-  return <motion.span style={{ opacity }}>{char}</motion.span>;
-}
-
-function AboutText() {
-  const target = useRef<HTMLParagraphElement>(null);
-  const { scrollYProgress } = useScroll({ target, offset: ["start 0.85", "end 0.27"] });
-  const reduced = useReducedMotion();
-  let index = 0;
-  return (
-    <p className="about-copy" ref={target}>
-      {reduced ? about : <>
-        <span className="sr-only">{about}</span>
-        <span aria-hidden="true">
-          {about.split(" ").map((word, wordIndex) => (
-            <span className="about-word" key={wordIndex}>{[...word].map((char) => (
-              <Letter key={index} char={char} index={index++} total={about.length} progress={scrollYProgress} />
-            ))}{" "}</span>
-          ))}
-        </span>
-      </>}
-    </p>
-  );
-}
-
-const decorations = [
-  { name: "moon", x: -80, delay: .1 },
-  { name: "form", x: -80, delay: .25 },
-  { name: "lego", x: 80, delay: .15 },
-  { name: "group", x: 80, delay: .3 },
+const aboutPieces = [
+  { image: "/media/iphone-15-plus-blue.png", caption: "Device I use for convo", alt: "Blue iPhone 15 Plus", kind: "phone" },
+  { image: "/media/ish-at-work.png", caption: "ISH", alt: "Illustration of Y Eswar working at his laptop", kind: "portrait" },
+  { image: "/media/macbook-air-m5-closed.jpg", caption: "Device I use to cook", alt: "Closed MacBook Air with M5 in sky blue", kind: "laptop" },
 ];
 
 function About() {
   return (
-    <section id="about" className="about-section">
-      {decorations.map(({ name, x, delay }) => (
-        <Reveal key={name} className={"decoration decoration-" + name} x={x} y={0} delay={delay}>
-          <img src={"/media/" + name + ".png"} alt="" loading="lazy" decoding="async" />
-        </Reveal>
-      ))}
-      <div className="about-center">
-        <span className="micro">02 / INTRODUCTION</span>
-        <Reveal><h2 className="hero-heading section-heading">About me</h2></Reveal>
-        <AboutText />
-        <Reveal delay={.15}><ContactButton /></Reveal>
+    <div id="about" className="about-section">
+      <div className="about-intro">
+        <h1 id="hero-heading">Hii, I’m Y ESWAR</h1>
+        <p className="about-tagline">You can call me <strong>ISH</strong>.</p>
       </div>
-    </section>
-  );
-}
-
-function Focus() {
-  return (
-    <section id="focus" className="focus-section">
-      <span className="micro">03 / WHAT I DO</span>
-      <Reveal><h2 className="section-heading">Focus</h2></Reveal>
-      <div className="focus-list">
-        {focus.map(([name, description], i) => (
-          <Reveal className="focus-row" key={name} delay={i * .08}>
-            <span className="big-number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
-            <div><h3>{name}</h3><p>{description}</p></div>
-          </Reveal>
-        ))}
+      <div className="about-center" id="focus">
+        <p className="micro about-kicker">Data science &amp; applied AI <span>· Hyderabad, India</span></p>
+        <h2>I work with data and build <em>tools I’d want to use.</em></h2>
+        <p>I’m a data scientist and AI/ML engineer pursuing an M.Tech in Data Science at GITAM University.
+          I study unusual learning patterns with <AboutPreview name="EduSentinel">EduSentinel</AboutPreview>,
+          build <AboutPreview name="MRS by Letterboxd">film recommendations</AboutPreview>,
+          and explore <AboutPreview name="Smart Energy Grid">energy forecasting</AboutPreview> and{" "}
+          <AboutPreview name="Image Colourisation">computer vision</AboutPreview>.
+        </p>
+        <p>I also design and build the interfaces around that work. I’m making{" "}
+          <AboutPreview name="Miracle Website">Miracle</AboutPreview> to convert files on your computer
+          and <AboutPreview name="Telex Website">Telex</AboutPreview> to make reading a script on a Mac easier.
+        </p>
+        <p className="about-hint">Hover or tap the underlined words to preview my work.</p>
       </div>
-    </section>
+      <div className="about-board">
+        <Board name="about-scrapbook" showHint={false}>{bounds => (
+          <div className="about-collage">
+            {aboutPieces.map(({ image, caption, alt, kind }) => (
+              <BoardPiece key={image} board="about-scrapbook" bounds={bounds} label={caption}
+                className={"about-piece about-piece-" + kind}>
+                <figure>
+                  <div className="about-artwork">
+                    <img src={image} alt={alt} decoding="async" draggable={false} />
+                  </div>
+                  <figcaption>{caption}</figcaption>
+                </figure>
+              </BoardPiece>
+            ))}
+          </div>
+        )}</Board>
+      </div>
+    </div>
   );
 }
 
@@ -200,7 +197,15 @@ function ProjectCard({ project, index, onOpen }: {
         </span>
       </button>
       <div className="project-card-copy">
-        <h3>{project.name}</h3>
+        <div className="project-title-row">
+          <h3>{project.name}</h3>
+          <div className="project-links">
+            {project.repo && <a className="project-link project-repo" href={project.repo} target="_blank" rel="noopener noreferrer"
+              aria-label={project.name + " on GitHub"} title="GitHub repository"><Github size={15} aria-hidden="true" /></a>}
+            {project.url && <a className="project-link project-live" href={project.url} target="_blank" rel="noopener noreferrer"
+              aria-label={project.name + " live site"}>Live <ArrowUpRight size={12} aria-hidden="true" /></a>}
+          </div>
+        </div>
         <p className="project-summary">{project.overview}</p>
         <p className="project-stack micro"><span>Made with</span> {project.stack}</p>
       </div>
@@ -241,8 +246,8 @@ function Projects() {
             <h4>{selected.overview}</h4>
             <p>{selected.detail}</p>
             <p className="micro">{selected.stack}</p>
-            {selected.url && <a className="white-button" href={selected.url} target="_blank" rel="noopener noreferrer">
-              {selected.linkLabel || "Visit website"} <ArrowUpRight size={16} aria-hidden="true" />
+            {(selected.url || selected.repo) && <a className="white-button" href={selected.url ?? selected.repo} target="_blank" rel="noopener noreferrer">
+              {selected.linkLabel ?? (selected.url ? "Visit website" : "View source")} <ArrowUpRight size={16} aria-hidden="true" />
             </a>}
           </div>
         </article>}
@@ -251,6 +256,11 @@ function Projects() {
   );
 }
 
+const skillPages = [
+  { title: "Data & intelligence", groups: [0, 1, 2, 3, 8] },
+  { title: "Code & creation", groups: [4, 5, 6, 7] },
+];
+
 function Toolkit() {
   return (
     <section className="profile-section" id="toolkit" aria-labelledby="toolkit-title">
@@ -258,19 +268,20 @@ function Toolkit() {
         <div className="profile-heading"><span className="micro">05 / Tools I use</span><h2 id="toolkit-title">Skills</h2></div>
         <Board name="skills">{bounds => (
           <div className="skill-spread">
-            {["Data & intelligence", "Code & creation"].map((title, page) => (
+            {skillPages.map(({ title, groups }) => (
               <div key={title} className="skill-page">
                 <h3>{title}</h3>
-                {(page === 0 ? toolkit.slice(0, 4) : toolkit.slice(4)).map(({ title: group, items }, index) => (
-                  <div key={group} className="skill-group">
-                    <h4>{String(page * 4 + index + 1).padStart(2, "0")} / {group}</h4>
+                {groups.map(index => {
+                  const { title: group, items } = toolkit[index];
+                  return <div key={group} className="skill-group">
+                    <h4>{String(index + 1).padStart(2, "0")} / {group}</h4>
                     <div className="skill-pieces">
                       {items.map(([tool, icon], i) => <BoardPiece key={tool} board="skills" bounds={bounds} label={tool} className={"skill-piece swatch-" + ((index + i) % 5)}>
                         <img src={icon} alt="" draggable={false} loading="lazy" /><span>{tool}</span>
                       </BoardPiece>)}
                     </div>
-                  </div>
-                ))}
+                  </div>;
+                })}
               </div>
             ))}
           </div>
@@ -331,7 +342,7 @@ function Contact() {
       <div className="contact-card">
         <div className="contact-copy">
           <span className="micro contact-status">Open to research &amp; collaborations</span>
-          <h2 id="contact-title">Let’s make it <span>real.</span></h2>
+          <h2 id="contact-title">Let’s <span>connect!!</span></h2>
           <p>I’m open to research, data science and AI/ML roles, and collaborations.</p>
           <div className="contact-actions">
             <a className="white-button" href={"mailto:" + email}><Mail size={16} aria-hidden="true" /> Email me</a>
@@ -341,8 +352,10 @@ function Contact() {
         <div className="contact-footer">
           <span className="micro">Y Eswar · Hyderabad, India</span>
           <div className="contact-links">
-            <a href={github} aria-label="GitHub"><Github size={17} aria-hidden="true" /></a>
-            <a href={linkedin} aria-label="LinkedIn"><Linkedin size={17} aria-hidden="true" /></a>
+            <a href={github}><Github size={17} aria-hidden="true" /> GitHub</a>
+            <a href={linkedin}><Linkedin size={17} aria-hidden="true" /> LinkedIn</a>
+            <a href={instagram}><Instagram size={17} aria-hidden="true" /> Instagram</a>
+            <a href={twitter}><Twitter size={17} aria-hidden="true" /> X / Twitter</a>
           </div>
         </div>
         <img className="contact-landscape" src="/media/contact-landscape.webp" alt="" loading="lazy" decoding="async" />
@@ -362,7 +375,11 @@ export function App() {
   const [theme, setTheme] = useState<Theme>(() => document.documentElement.dataset.theme === "light" ? "light" : "dark");
 
   useEffect(() => {
-    if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "instant" });
+    if (location.hash) {
+      document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "instant" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
   }, []);
 
   function toggleTheme() {
@@ -384,9 +401,6 @@ export function App() {
       <Intro ref={player} autoplay={autoplay} onFinish={finish} />
       <main className="site" id="main" tabIndex={-1}>
         {entered ? <Hero theme={theme} onThemeChange={toggleTheme} sound={sound} onSoundChange={() => setSound(v => !v)} onReplay={replay} /> : <div className="hero-reserve" aria-hidden="true" />}
-        <Marquee />
-        <About />
-        <Focus />
         <Projects />
         <Toolkit />
         <Certifications />
