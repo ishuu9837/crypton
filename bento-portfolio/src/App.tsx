@@ -1,15 +1,15 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, Moon, Play, Sun, Twitter, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, Menu, Moon, RotateCcw, Sparkles, Sun, Twitter, Volume2, VolumeX, X, Zap } from "lucide-react";
 import { Intro, shouldShowIntro } from "./Intro";
 import type { IntroPlayer } from "./Intro";
 import { Board, BoardPiece } from "./Board";
-import { certifications, email, gallery, github, instagram, linkedin, projects, toolkit, twitter } from "./content";
+import { certifications, email, gallery, github, instagram, linkedin, projects, researchCases, toolkit, twitter } from "./content";
 import type { Project } from "./content";
 
 const easing = [0.25, 0.1, 0.25, 1] as const;
-const nav = [["Projects", "#projects"], ["Skills", "#toolkit"], ["Gallery", "#gallery"], ["Contact", "#contact"]];
+const nav = [["Projects", "#projects"], ["Research", "#research"], ["Skills", "#toolkit"], ["Gallery", "#gallery"], ["Contact", "#contact"]];
 type Theme = "dark" | "light";
 
 function Reveal({ children, className, delay = 0, x = 0, y = 30 }: {
@@ -53,9 +53,24 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
               aria-label={"Switch to " + nextTheme + " mode"} title={"Switch to " + nextTheme + " mode"}>
               {theme === "dark" ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
             </button>
-            <button className="white-button header-replay" type="button" onClick={onReplay} aria-label="Replay intro">
-              <Play size={15} aria-hidden="true" /> Replay
+            <button className="white-button icon-button" type="button" onClick={onReplay} aria-label="Replay intro" title="Replay intro">
+              <RotateCcw size={17} aria-hidden="true" />
             </button>
+            <details className="mobile-menu" onKeyDown={event => {
+              if (event.key === "Escape" && event.currentTarget.open) {
+                event.currentTarget.open = false;
+                event.currentTarget.querySelector("summary")?.focus();
+              }
+            }}>
+              <summary className="white-button icon-button" aria-label="Navigation menu"><Menu size={19} aria-hidden="true" /></summary>
+              <nav aria-label="Mobile primary" onClick={event => {
+                if (event.target instanceof Element && event.target.closest("a")) {
+                  event.currentTarget.closest("details")?.removeAttribute("open");
+                }
+              }}>
+                {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+              </nav>
+            </details>
           </div>
         </div>
       </motion.header>
@@ -65,7 +80,7 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
 }
 
 function AboutPreview({ name, children }: { name: string; children: ReactNode }) {
-  const project = projects.find(item => item.name === name);
+  const project = projects.find(item => item.name === name) ?? researchCases.find(item => item.name === name);
   const id = useId();
   const anchor = useRef<HTMLSpanElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -119,7 +134,7 @@ function AboutPreview({ name, children }: { name: string; children: ReactNode })
       <span id={id} hidden={!open} className="about-popover" data-above={above}
         style={{ left: `calc(50% + ${offset}px)` }}>
         <a href={project.url ?? project.repo ?? "#projects"} className="about-popover-card">
-          <img src={project.image} alt="" width={272} height={153} loading="lazy" decoding="async" />
+          {project.image && <img src={project.image} alt="" width={272} height={153} loading="lazy" decoding="async" />}
           <span className="about-popover-title">{project.name} <ArrowUpRight size={15} aria-hidden="true" /></span>
           <span className="about-popover-note">{project.overview}</span>
         </a>
@@ -128,13 +143,6 @@ function AboutPreview({ name, children }: { name: string; children: ReactNode })
   );
 }
 
-const scrapbookPieces = [
-  { image: "/media/iphone-15-plus-blue.png", caption: "Device I use for convo", alt: "Blue iPhone 15 Plus", kind: "phone" },
-  { image: "/media/ish-at-work.png", caption: "ISH", alt: "Illustration of Y Eswar working at his laptop", kind: "portrait" },
-  { image: "/media/macbook-air-m5-closed.jpg", caption: "Device I use to cook", alt: "Closed MacBook Air with M5 in sky blue", kind: "laptop" },
-  { image: "/media/diet-coke.jpg", caption: "I LOVE TO CONSUME", alt: "Silver Diet Coke can", kind: "drink" },
-];
-
 function ContactScrapbook() {
   return (
     <div className="contact-stage">
@@ -142,17 +150,14 @@ function ContactScrapbook() {
       <div className="contact-scrapbook" role="group" aria-label="Personal scrapbook">
         <Board name="contact-scrapbook" showHint={false}>{bounds => (
           <div className="scrapbook-pieces">
-            {scrapbookPieces.map(({ image, caption, alt, kind }) => (
-              <BoardPiece key={image} board="contact-scrapbook" bounds={bounds} label={caption}
-                className={"scrapbook-piece scrapbook-" + kind}>
-                <figure>
-                  <div className="scrapbook-artwork">
-                    <img src={image} alt={alt} loading="lazy" decoding="async" draggable={false} />
-                  </div>
-                  <figcaption>{caption}</figcaption>
-                </figure>
-              </BoardPiece>
-            ))}
+            <BoardPiece board="contact-scrapbook" bounds={bounds} label="Device I use to cook" className="scrapbook-piece">
+              <figure>
+                <div className="scrapbook-artwork">
+                  <img src="/media/macbook-air-m5-closed.jpg" alt="Closed MacBook Air with M5 in sky blue" loading="lazy" decoding="async" draggable={false} />
+                </div>
+                <figcaption>Device I use to cook</figcaption>
+              </figure>
+            </BoardPiece>
           </div>
         )}</Board>
       </div>
@@ -164,21 +169,22 @@ function About() {
   return (
     <div id="about" className="about-section">
       <div className="about-intro">
-        <h1 id="hero-heading">Hii, I’m Y ESWAR</h1>
+        <h1 id="hero-heading">Hii, I'm Y ESWAR</h1>
         <p className="about-tagline">You can call me <strong>ISH</strong>.</p>
       </div>
       <div className="about-center" id="focus">
         <p className="micro about-kicker">Data science &amp; applied AI <span>· Hyderabad, India</span></p>
-        <h2>I work with data and build <em>tools I’d want to use.</em></h2>
-        <p>I’m a data scientist and AI/ML engineer pursuing an M.Tech in Data Science at GITAM University.
-          I study unusual learning patterns with <AboutPreview name="EduSentinel">EduSentinel</AboutPreview>,
-          build <AboutPreview name="MRS by Letterboxd">film recommendations</AboutPreview>,
-          and explore <AboutPreview name="Smart Energy Grid">energy forecasting</AboutPreview> and{" "}
-          <AboutPreview name="Image Colourisation">computer vision</AboutPreview>.
+        <h2>I build intelligent systems and <em>AI-powered tools that solve real problems.</em></h2>
+        <p>I'm an <strong>AI/ML engineer</strong> pursuing an M.Tech in Data Science at GITAM University. I work with AI agents, large language models, deep learning, and computer vision, developing intelligent systems for real-world applications.</p>
+        <p>My work includes <AboutPreview name="EduSentinel">EduSentinel</AboutPreview> for learning anomaly detection,{" "}
+          <AboutPreview name="MRS by Letterboxd">film recommendations</AboutPreview>,{" "}
+          <AboutPreview name="Smart Energy Grid">energy forecasting</AboutPreview>, and{" "}
+          <AboutPreview name="Few-Shot Medical Image Classification">few-shot medical image classification</AboutPreview>.
+          I also explore LLM fine-tuning and autonomous AI systems.
         </p>
-        <p>I also design and build the interfaces around that work. I’m making{" "}
-          <AboutPreview name="Miracle Website">Miracle</AboutPreview> to convert files on your computer
-          and <AboutPreview name="Telex Website">Telex</AboutPreview> to make reading a script on a Mac easier.
+        <p>Beyond AI and machine learning, I design and build practical software. I'm developing{" "}
+          <AboutPreview name="Miracle Website">Miracle</AboutPreview> for desktop file conversion and{" "}
+          <AboutPreview name="Telex Website">Telex</AboutPreview> to make reading scripts on a Mac easier.
         </p>
         <p className="about-hint">Hover or tap the underlined words to preview my work.</p>
       </div>
@@ -263,6 +269,30 @@ function Projects() {
           </div>
         </article>}
       </dialog>
+    </section>
+  );
+}
+
+function Research() {
+  return (
+    <section className="profile-section research-section" id="research" aria-labelledby="research-title">
+      <div className="profile-heading">
+        <span className="micro">Studies &amp; experiments</span>
+        <h2 id="research-title">Research and Case Studies</h2>
+      </div>
+      <div className="research-grid">
+        {researchCases.map(({ name, category, overview, url, repo }) => (
+          <article className="research-card" key={name}>
+            <p className="micro">{category}</p>
+            <h3>{name}</h3>
+            <p>{overview}</p>
+            <div className="project-links">
+              {repo && <a className="project-link" href={repo} aria-label={name + " on GitHub"}><Github size={15} aria-hidden="true" /> GitHub</a>}
+              {url && <a className="project-link" href={url} aria-label={name + " live site"}>Live <ArrowUpRight size={13} aria-hidden="true" /></a>}
+            </div>
+          </article>
+        ))}
+      </div>
     </section>
   );
 }
@@ -352,13 +382,21 @@ function Contact() {
     <footer id="contact" className="profile-section contact-section" aria-labelledby="contact-title">
       <div className="contact-card">
         <div className="contact-copy">
-          <span className="micro contact-status">Open to research &amp; collaborations</span>
-          <h2 id="contact-title">Let’s <span>connect!!</span></h2>
-          <p>I’m open to research, data science and AI/ML roles, and collaborations.</p>
-          <div className="contact-actions">
-            <a className="white-button" href={"mailto:" + email}><Mail size={16} aria-hidden="true" /> Email me</a>
-            <a className="white-button" href="/resume.html">See my CV <ArrowUpRight size={16} aria-hidden="true" /></a>
+          <div className="contact-message">
+            <span className="micro contact-status">Open to research &amp; collaborations</span>
+            <h2 id="contact-title">Let’s <span>connect!!</span></h2>
+            <p>I’m open to research, data science and AI/ML roles, and collaborations.</p>
+            <div className="contact-actions">
+              <a className="white-button" href={"mailto:" + email}><Mail size={16} aria-hidden="true" /> Email me</a>
+              <a className="white-button" href="/resume.html">See my CV <ArrowUpRight size={16} aria-hidden="true" /></a>
+            </div>
           </div>
+          <figure className="contact-drink">
+            <Sparkles className="drink-sparkles" size={30} aria-hidden="true" />
+            <Zap className="drink-zap" size={23} aria-hidden="true" />
+            <img src="/media/diet-coke.jpg" alt="Silver Diet Coke can" width={600} height={900} loading="lazy" decoding="async" />
+            <figcaption>I LOVE TO CONSUME</figcaption>
+          </figure>
         </div>
         <div className="contact-footer">
           <span className="micro">Y Eswar · Hyderabad, India</span>
@@ -397,7 +435,7 @@ export function App() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#0b0b0c" : "#f1ecdf");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#1c0b12" : "#f1ecdf");
     try { localStorage.setItem("eswar-theme", nextTheme); } catch {}
   }
 
@@ -413,6 +451,7 @@ export function App() {
       <main className="site" id="main" tabIndex={-1}>
         {entered ? <Hero theme={theme} onThemeChange={toggleTheme} sound={sound} onSoundChange={() => setSound(v => !v)} onReplay={replay} /> : <div className="hero-reserve" aria-hidden="true" />}
         <Projects />
+        <Research />
         <Toolkit />
         <Certifications />
         <Gallery />

@@ -105,6 +105,36 @@ export const projects: Project[] = [
   },
 ];
 
+type ResearchCase = Pick<Project, "name" | "category" | "overview" | "url" | "repo"> & { image?: string };
+
+export const researchCases: ResearchCase[] = [
+  {
+    name: "EduSentinel",
+    category: "Research · Learning analytics",
+    overview: "A NumPy autoencoder flags unusual patterns across eight learning management system features.",
+    url: "https://edusentinel.vercel.app",
+    repo: github + "/edusentinel",
+  },
+  {
+    name: "Real-Time Face Detection",
+    category: "Research · Computer vision",
+    overview: "A Python and OpenCV pipeline detects faces from live video and stores detected face records in MongoDB.",
+    repo: github + "/REAL-TIME-FACE-DETECTION",
+  },
+  {
+    name: "Few-Shot Medical Image Classification",
+    category: "Current research · Medical imaging",
+    overview: "I’m exploring few-shot learning for brain tumor image classification when only a small number of labelled examples are available.",
+    repo: github + "/Brain-Tumor-using-Few-Shot-Learning",
+  },
+  {
+    name: "Hark Design Card",
+    category: "Case study · Product design",
+    overview: "An interface concept for browsing files generated in chat, comparing revisions, and tracing files back to their source messages.",
+    url: "https://hark-artifacts-demo.vercel.app",
+  },
+];
+
 export const toolkit = [
   { title: 'Data & analytics', items: [['Python',"/media/skills/python-original.svg"],['SQL',"/media/skills/azuresqldatabase-original.svg"],['NumPy',"/media/skills/numpy-original.svg"],['Pandas',"/media/skills/pandas-original.svg"],['PySpark',"/media/skills/apachespark.svg"],['Power BI',"/media/skills/powerbi.svg"]] },
   { title: 'Machine learning', items: [['PyTorch',"/media/skills/pytorch-original.svg"],['TensorFlow',"/media/skills/tensorflow-original.svg"],['Keras',"/media/skills/keras-original.svg"],['Scikit-learn',"/media/skills/scikitlearn-original.svg"],['Transformers',"/media/skills/huggingface.svg"]] },
