@@ -64,7 +64,7 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
       <div className="hero-layout">
         <motion.div className="hero-copy" {...entrance(.12, 19)}>
           <p className="hero-eyebrow"><span /> Data science &amp; applied AI</p>
-          <h1 id="hero-heading">Hi, I’m<br />{" "}Eswar<span>.</span></h1>
+          <h1 id="hero-heading">Hi, I’m<br />{" "}<em>Eswar.</em></h1>
           <p className="hero-introduction">I work with data, train models, and build apps for the things I wish were easier.</p>
           <div className="hero-actions">
             <a className="hero-work" href="#projects">See my work <ArrowDown size={16} aria-hidden="true" /></a>
@@ -356,7 +356,7 @@ export function App() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#000000" : "#f7f7f7");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#101114" : "#f5f3ef");
     try { localStorage.setItem("eswar-theme", nextTheme); } catch {}
   }
 
