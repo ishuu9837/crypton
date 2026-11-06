@@ -67,7 +67,7 @@ export const Intro = forwardRef<IntroPlayer, { autoplay: boolean; onFinish: () =
     return (
       <dialog ref={dialog} className="gate" aria-label="Portfolio introduction"
         onCancel={event => { event.preventDefault(); finish(); }}>
-        <video ref={video} src="/media/intro-oled.mp4" preload={autoplay ? "auto" : "none"} playsInline aria-hidden="true"
+        <video ref={video} src="/media/intro.mp4" preload={autoplay ? "auto" : "none"} playsInline aria-hidden="true"
           onEnded={finish} onError={finish} />
         <div className="gate-actions">
           <button className="gate-sound" type="button" onClick={toggleSound} aria-label={muted ? "Unmute intro" : "Mute intro"}>
