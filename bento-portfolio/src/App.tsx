@@ -152,19 +152,16 @@ function About() {
       </div>
       <div className="about-center" id="focus">
         <p className="micro about-kicker">Data science &amp; applied AI <span>· Hyderabad, India</span></p>
-        <h2>I build intelligent systems and <em>AI-powered tools that solve real problems.</em></h2>
-        <p>I'm an <strong>AI/ML engineer</strong> pursuing an M.Tech in Data Science at GITAM University. I work with AI agents, large language models, deep learning, and computer vision, developing intelligent systems for real-world applications.</p>
-        <p>My work includes <AboutPreview name="EduSentinel">EduSentinel</AboutPreview> for learning anomaly detection,{" "}
+        <h2>I build <em>AI tools</em> for real problems.</h2>
+        <p>I'm an <strong>AI/ML engineer</strong> pursuing an M.Tech in Data Science at GITAM University. I work with AI agents, language models, and computer vision.</p>
+        <p>My work spans <AboutPreview name="EduSentinel">EduSentinel</AboutPreview>,{" "}
           <AboutPreview name="MRS by Letterboxd">film recommendations</AboutPreview>,{" "}
           <AboutPreview name="Smart Energy Grid">energy forecasting</AboutPreview>, and{" "}
-          <AboutPreview name="Few-Shot Medical Image Classification">few-shot medical image classification</AboutPreview>.
-          I also explore LLM fine-tuning and autonomous AI systems.
+          <AboutPreview name="Few-Shot Medical Image Classification">few-shot medical imaging</AboutPreview>.
         </p>
-        <p>Beyond AI and machine learning, I design and build practical software. I'm developing{" "}
-          <AboutPreview name="Miracle Website">Miracle</AboutPreview> for desktop file conversion and{" "}
-          <AboutPreview name="Telex Website">Telex</AboutPreview> to make reading scripts on a Mac easier.
-        </p>
-        <p className="about-hint">Hover or tap the underlined words to preview my work.</p>
+        <p>I'm also building <AboutPreview name="Miracle Website">Miracle</AboutPreview> for file conversion and{" "}
+          <AboutPreview name="Telex Website">Telex</AboutPreview>, a Mac teleprompter.</p>
+        <p className="about-hint">Hover or tap an underline to preview my work.</p>
       </div>
       <img className="about-portrait" src="/media/ish-at-work-cutout.png"
         alt="Illustration of Y Eswar working at his laptop" width={1254} height={1254} decoding="async" />
@@ -286,18 +283,26 @@ const skillPages = [
 ];
 
 function Toolkit() {
+  const [activeGroup, setActiveGroup] = useState(0);
+
   return (
     <section className="profile-section" id="toolkit" aria-labelledby="toolkit-title">
       <article className="project-card board-card">
         <div className="profile-heading"><span className="micro">05 / Tools I use</span><h2 id="toolkit-title">Skills</h2></div>
+        <label className="skills-filter">
+          <span className="micro">Skill category</span>
+          <select value={activeGroup} onChange={event => setActiveGroup(Number(event.currentTarget.value))}>
+            {toolkit.map(({ title }, index) => <option key={title} value={index}>{title}</option>)}
+          </select>
+        </label>
         <Board name="skills">{bounds => (
           <div className="skill-spread">
             {skillPages.map(({ title, groups }) => (
-              <div key={title} className="skill-page">
+              <div key={title} className="skill-page" data-active={groups.includes(activeGroup)}>
                 <h3>{title}</h3>
                 {groups.map(index => {
                   const { title: group, items } = toolkit[index];
-                  return <div key={group} className="skill-group">
+                  return <div key={group} className="skill-group" data-active={index === activeGroup}>
                     <h4>{String(index + 1).padStart(2, "0")} / {group}</h4>
                     <div className="skill-pieces">
                       {items.map(([tool, icon], i) => <BoardPiece key={tool} board="skills" bounds={bounds} label={tool} className={"skill-piece swatch-" + ((index + i) % 5)}>

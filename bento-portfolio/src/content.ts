@@ -111,27 +111,27 @@ export const researchCases: ResearchCase[] = [
   {
     name: "EduSentinel",
     category: "Research · Learning analytics",
-    overview: "A NumPy autoencoder flags unusual patterns across eight learning management system features.",
+    overview: "A NumPy autoencoder flags unusual patterns in learning data.",
     url: "https://edusentinel.vercel.app",
     repo: github + "/edusentinel",
   },
   {
     name: "Real-Time Face Detection",
     category: "Research · Computer vision",
-    overview: "A Python and OpenCV pipeline detects faces from live video and stores detected face records in MongoDB.",
+    overview: "An OpenCV pipeline detects faces in live video and stores the results in MongoDB.",
     repo: github + "/REAL-TIME-FACE-DETECTION",
   },
   {
     name: "Few-Shot Medical Image Classification",
     category: "Medical imaging",
     current: true,
-    overview: "I’m exploring few-shot learning for brain tumor image classification when only a small number of labelled examples are available.",
+    overview: "Classifying brain tumor images with only a few labelled examples.",
     repo: github + "/Brain-Tumor-using-Few-Shot-Learning",
   },
   {
     name: "Hark Design Card",
     category: "Case study · Product design",
-    overview: "An interface concept for browsing files generated in chat, comparing revisions, and tracing files back to their source messages.",
+    overview: "A design concept for browsing, comparing, and tracing files generated in chat.",
     url: "https://hark-artifacts-demo.vercel.app",
   },
 ];
