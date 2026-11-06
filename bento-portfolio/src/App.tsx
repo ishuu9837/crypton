@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import type { MotionValue } from "framer-motion";
 import { ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail, MapPin, Moon, Play, Sun, Volume2, VolumeX, X } from "lucide-react";
 import { Intro, shouldShowIntro } from "./Intro";
@@ -45,20 +45,23 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
     <section className="hero" id="home" aria-labelledby="hero-heading">
       <motion.header className="hero-header" {...entrance(0, -12)}>
         <a className="site-name" href="#home" aria-label="ishuu.me home">ishuu.me</a>
-        <nav className="hero-nav" aria-label="Primary">
-          {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
-        </nav>
-        <div className="header-controls">
-          <button className="white-button header-replay" type="button" onClick={onReplay} aria-label="Replay intro">
-            <Play size={15} aria-hidden="true" /> Replay
-          </button>
-          <button className="white-button icon-button" type="button" onClick={onSoundChange}
-            aria-label="Replay sound" aria-pressed={sound} title={sound ? "Replay sound on" : "Replay sound off"}>
-            {sound ? <Volume2 size={17} aria-hidden="true" /> : <VolumeX size={17} aria-hidden="true" />}
-          </button>
-          <button className="theme-toggle white-button icon-button" type="button" onClick={onThemeChange} aria-label={"Switch to " + nextTheme + " mode"}>
-            {theme === "dark" ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
-          </button>
+        <div className="hero-bar">
+          <nav className="hero-nav" aria-label="Primary">
+            {nav.map(([label, href]) => <a key={href} href={href}>{label}</a>)}
+          </nav>
+          <div className="header-controls">
+            <button className="white-button icon-button" type="button" onClick={onSoundChange}
+              aria-label="Replay sound" aria-pressed={sound} title={sound ? "Replay sound on" : "Replay sound off"}>
+              {sound ? <Volume2 size={17} aria-hidden="true" /> : <VolumeX size={17} aria-hidden="true" />}
+            </button>
+            <button className="white-button icon-button" type="button" onClick={onThemeChange}
+              aria-label={"Switch to " + nextTheme + " mode"} title={"Switch to " + nextTheme + " mode"}>
+              {theme === "dark" ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
+            </button>
+            <button className="white-button header-replay" type="button" onClick={onReplay} aria-label="Replay intro">
+              <Play size={15} aria-hidden="true" /> Replay
+            </button>
+          </div>
         </div>
       </motion.header>
       <div className="hero-layout">
@@ -73,9 +76,7 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
         </motion.div>
         <motion.figure className="hero-photo" {...entrance(.24, 22)}>
           <div className="portrait-field">
-            <div className="portrait-position">
-              <img className="portrait-img" src="/media/eswar-portrait.jpg" alt="Portrait of Y Eswar" width={818} height={804} />
-            </div>
+            <img className="portrait-img" src="/media/eswar-anime.jpg" alt="Illustrated portrait of Y Eswar" width={2048} height={2048} />
           </div>
           <figcaption><span>Y ESWAR</span><span><MapPin size={14} aria-hidden="true" /> Hyderabad, India</span></figcaption>
         </motion.figure>
@@ -182,18 +183,27 @@ function Focus() {
 function ProjectCard({ project, index, onOpen }: {
   project: Project; index: number; onOpen: (trigger: HTMLButtonElement) => void;
 }) {
+  const frame = useRef<HTMLSpanElement>(null);
+  const visible = useInView(frame);
+
   return (
     <article className="project-card">
-      <div className="project-header">
-        <span className="big-number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-        <div><p className="micro">{project.category}</p><h3>{project.name}</h3></div>
-      </div>
       <button className="project-preview" type="button" aria-haspopup="dialog"
         aria-label={"View project details for " + project.name} onClick={event => onOpen(event.currentTarget)}>
-        <img src={project.image} alt="" loading="lazy" decoding="async" />
-        <span className="preview-action">Project details <ArrowRight size={17} aria-hidden="true" /></span>
+        <span className="project-preview-frame" ref={frame} data-playing={project.illustration ? undefined : visible}>
+          <span className="project-preview-window"><img src={project.image} alt="" loading="lazy" decoding="async" /></span>
+        </span>
+        <span className="project-card-meta">
+          <span className="project-note">{project.category.split(" / ")[0]}</span>
+          <span className="project-stamp micro">EXP. {String(index + 1).padStart(3, "0")}</span>
+          <span className="preview-action">Project details <ArrowRight size={13} aria-hidden="true" /></span>
+        </span>
       </button>
-      <p className="project-summary">{project.overview}</p>
+      <div className="project-card-copy">
+        <h3>{project.name}</h3>
+        <p className="project-summary">{project.overview}</p>
+        <p className="project-stack micro"><span>Made with</span> {project.stack}</p>
+      </div>
     </article>
   );
 }
@@ -315,25 +325,28 @@ function Gallery() {
   );
 }
 
-function Contact({ onReplay }: { onReplay: () => void }) {
+function Contact() {
   return (
     <footer id="contact" className="profile-section contact-section" aria-labelledby="contact-title">
       <div className="contact-card">
-        <div>
-          <span className="micro">08 / Contact</span>
-          <h2 id="contact-title">Let’s talk.</h2>
+        <div className="contact-copy">
+          <span className="micro contact-status">Open to research &amp; collaborations</span>
+          <h2 id="contact-title">Let’s make it <span>real.</span></h2>
           <p>I’m open to research, data science and AI/ML roles, and collaborations.</p>
-        </div>
-        <div className="contact-details">
-          <a className="contact-email" href={"mailto:" + email}><Mail size={19} aria-hidden="true" /> {email} <ArrowUpRight size={16} aria-hidden="true" /></a>
-          <div className="contact-links">
-            <a href={github}><Github size={16} aria-hidden="true" /> GitHub</a>
-            <a href={linkedin}><Linkedin size={16} aria-hidden="true" /> LinkedIn</a>
-            <a href="/resume.html">Résumé <ArrowUpRight size={15} aria-hidden="true" /></a>
+          <div className="contact-actions">
+            <a className="white-button" href={"mailto:" + email}><Mail size={16} aria-hidden="true" /> Email me</a>
+            <a className="white-button" href="/resume.html">See my CV <ArrowUpRight size={16} aria-hidden="true" /></a>
           </div>
         </div>
+        <div className="contact-footer">
+          <span className="micro">Y Eswar · Hyderabad, India</span>
+          <div className="contact-links">
+            <a href={github} aria-label="GitHub"><Github size={17} aria-hidden="true" /></a>
+            <a href={linkedin} aria-label="LinkedIn"><Linkedin size={17} aria-hidden="true" /></a>
+          </div>
+        </div>
+        <img className="contact-landscape" src="/media/contact-landscape.webp" alt="" loading="lazy" decoding="async" />
       </div>
-      <div className="contact-footer"><span>Y Eswar · Hyderabad, India</span><button className="white-button" type="button" onClick={onReplay}><Play size={15} aria-hidden="true" /> Replay intro</button></div>
       <p className="site-credit">MADE BY I⚡️H</p>
     </footer>
   );
@@ -356,7 +369,7 @@ export function App() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#101114" : "#f5f3ef");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#0b0b0c" : "#f1ecdf");
     try { localStorage.setItem("eswar-theme", nextTheme); } catch {}
   }
 
@@ -378,7 +391,7 @@ export function App() {
         <Toolkit />
         <Certifications />
         <Gallery />
-        <Contact onReplay={replay} />
+        <Contact />
       </main>
     </>
   );
