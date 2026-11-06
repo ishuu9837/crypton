@@ -141,7 +141,6 @@ export const toolkit = [
   { title: 'Machine learning', items: [['PyTorch',"/media/skills/pytorch-original.svg"],['TensorFlow',"/media/skills/tensorflow-original.svg"],['Keras',"/media/skills/keras-original.svg"],['Scikit-learn',"/media/skills/scikitlearn-original.svg"],['Transformers',"/media/skills/huggingface.svg"]] },
   { title: 'Computer vision', items: [['OpenCV',"/media/skills/opencv-original.svg"]] },
   { title: 'Notebooks', items: [['Jupyter',"/media/skills/jupyter-original.svg"],['Google Colab',"/media/skills/googlecolab.svg"]] },
-  { title: 'Web & interaction', items: [['JavaScript',"/media/skills/javascript-original.svg"],['HTML',"/media/skills/html5-original.svg"],['CSS',"/media/skills/css3.svg"],['React.js',"/media/skills/react.svg"],['Three.js',"/media/skills/threejs.svg"]] },
   { title: 'APIs & databases', items: [['Flask',"/media/skills/flask.svg"],['MongoDB',"/media/skills/mongodb-original.svg"],['MySQL',"/media/skills/mysql.svg"]] },
   { title: 'Cloud & development', items: [['Git',"/media/skills/git-original.svg"],['GitHub',"/media/skills/github.svg"],['Docker',"/media/skills/docker-original.svg"],['Vercel',"/media/skills/vercel.svg"],['AWS',"/media/skills/amazonwebservices-original-wordmark.svg"]] },
   { title: 'Design & visual tools', items: [['Figma',"/media/skills/figma.svg"],['Canva',"/media/skills/canva.svg"],['Photoshop',"/media/skills/photoshop.svg"]] },

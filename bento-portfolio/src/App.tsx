@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, Menu, Moon, RotateCcw, Sparkles, Sun, Twitter, Volume2, VolumeX, X, Zap } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, Menu, Moon, RotateCcw, Sun, Twitter, Volume2, VolumeX, X } from "lucide-react";
 import { Intro, shouldShowIntro } from "./Intro";
 import type { IntroPlayer } from "./Intro";
 import { Board, BoardPiece } from "./Board";
@@ -152,7 +152,7 @@ function About() {
       </div>
       <div className="about-center" id="focus">
         <p className="micro about-kicker">Data science &amp; applied AI <span>· Hyderabad, India</span></p>
-        <h2>I build <em>AI tools</em> for real problems.</h2>
+        <h2>I build <em>AI tools</em> for real problems and make them work.</h2>
         <p>I'm an <strong>AI/ML engineer</strong> pursuing an M.Tech in Data Science at GITAM University. I build with AI agents, language models, deep learning, and computer vision, taking ideas from a first experiment toward useful, working tools.</p>
         <p>My work ranges from <AboutPreview name="EduSentinel">EduSentinel</AboutPreview>, which uses anomaly detection to surface unusual learning patterns, to{" "}
           <AboutPreview name="MRS by Letterboxd">film recommendations</AboutPreview> shaped by language, year, and genre. I also explore{" "}
@@ -278,8 +278,8 @@ function Research() {
 }
 
 const skillPages = [
-  { title: "Data & intelligence", groups: [0, 1, 2, 3, 8] },
-  { title: "Code & creation", groups: [4, 5, 6, 7] },
+  { title: "Data & intelligence", groups: [0, 1, 2, 3, 7] },
+  { title: "Code & creation", groups: [4, 5, 6] },
 ];
 
 function Toolkit() {
@@ -365,6 +365,30 @@ function Gallery() {
   );
 }
 
+function Backpack() {
+  return (
+    <section className="profile-section backpack-section" id="backpack" aria-labelledby="backpack-title">
+      <article className="project-card board-card">
+        <div className="profile-heading"><span className="micro">08 / Everyday carry</span><h2 id="backpack-title">My Backpack</h2></div>
+        <div className="backpack-board">
+          <figure className="backpack-figure">
+            <img className="backpack-mac" src="/media/macbook-air-m5-midnight.png" alt="Midnight MacBook Air M5, closed" loading="lazy" decoding="async" />
+            <figcaption>I use this to cook</figcaption>
+          </figure>
+          <figure className="backpack-figure">
+            <img className="backpack-phone" src="/media/iphone-15-plus-pink-cutout.png" alt="Pink iPhone 15 Plus shown from front and back" loading="lazy" decoding="async" />
+            <figcaption>I use this for convo</figcaption>
+          </figure>
+          <figure className="backpack-figure">
+            <img className="backpack-coke" src="/media/diet-coke-cutout.png" alt="Silver Diet Coke can" loading="lazy" decoding="async" />
+            <figcaption>A must item</figcaption>
+          </figure>
+        </div>
+      </article>
+    </section>
+  );
+}
+
 function Contact() {
   return (
     <footer id="contact" className="profile-section contact-section" aria-labelledby="contact-title">
@@ -379,11 +403,6 @@ function Contact() {
               <a className="white-button" href="/resume.html">See my CV <ArrowUpRight size={16} aria-hidden="true" /></a>
             </div>
           </div>
-          <figure className="contact-drink">
-            <Sparkles className="drink-sparkles" size={30} aria-hidden="true" />
-            <Zap className="drink-zap" size={23} aria-hidden="true" />
-            <img src="/media/diet-coke-cutout.png" alt="Silver Diet Coke can" width={466} height={700} loading="lazy" decoding="async" />
-          </figure>
         </div>
         <div className="contact-footer">
           <span className="micro">Y Eswar · Hyderabad, India</span>
@@ -442,6 +461,7 @@ export function App() {
         <Toolkit />
         <Certifications />
         <Gallery />
+        <Backpack />
         <Contact />
       </main>
     </>
