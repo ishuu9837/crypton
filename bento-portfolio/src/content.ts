@@ -105,7 +105,7 @@ export const projects: Project[] = [
   },
 ];
 
-type ResearchCase = Pick<Project, "name" | "category" | "overview" | "url" | "repo"> & { image?: string };
+type ResearchCase = Pick<Project, "name" | "category" | "overview" | "url" | "repo"> & { image?: string; current?: boolean };
 
 export const researchCases: ResearchCase[] = [
   {
@@ -123,7 +123,8 @@ export const researchCases: ResearchCase[] = [
   },
   {
     name: "Few-Shot Medical Image Classification",
-    category: "Current research · Medical imaging",
+    category: "Medical imaging",
+    current: true,
     overview: "I’m exploring few-shot learning for brain tumor image classification when only a small number of labelled examples are available.",
     repo: github + "/Brain-Tumor-using-Few-Shot-Learning",
   },

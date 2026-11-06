@@ -143,28 +143,6 @@ function AboutPreview({ name, children }: { name: string; children: ReactNode })
   );
 }
 
-function ContactScrapbook() {
-  return (
-    <div className="contact-stage">
-      <img className="contact-landscape" src="/media/contact-landscape.webp" alt="" loading="lazy" decoding="async" />
-      <div className="contact-scrapbook" role="group" aria-label="Personal scrapbook">
-        <Board name="contact-scrapbook" showHint={false}>{bounds => (
-          <div className="scrapbook-pieces">
-            <BoardPiece board="contact-scrapbook" bounds={bounds} label="Device I use to cook" className="scrapbook-piece">
-              <figure>
-                <div className="scrapbook-artwork">
-                  <img src="/media/macbook-air-m5-closed.jpg" alt="Closed MacBook Air with M5 in sky blue" loading="lazy" decoding="async" draggable={false} />
-                </div>
-                <figcaption>Device I use to cook</figcaption>
-              </figure>
-            </BoardPiece>
-          </div>
-        )}</Board>
-      </div>
-    </div>
-  );
-}
-
 function About() {
   return (
     <div id="about" className="about-section">
@@ -276,22 +254,27 @@ function Projects() {
 function Research() {
   return (
     <section className="profile-section research-section" id="research" aria-labelledby="research-title">
-      <div className="profile-heading">
-        <span className="micro">Studies &amp; experiments</span>
-        <h2 id="research-title">Research and Case Studies</h2>
-      </div>
-      <div className="research-grid">
-        {researchCases.map(({ name, category, overview, url, repo }) => (
-          <article className="research-card" key={name}>
-            <p className="micro">{category}</p>
-            <h3>{name}</h3>
-            <p>{overview}</p>
-            <div className="project-links">
-              {repo && <a className="project-link" href={repo} aria-label={name + " on GitHub"}><Github size={15} aria-hidden="true" /> GitHub</a>}
-              {url && <a className="project-link" href={url} aria-label={name + " live site"}>Live <ArrowUpRight size={13} aria-hidden="true" /></a>}
-            </div>
-          </article>
-        ))}
+      <div className="board-card">
+        <div className="profile-heading">
+          <span className="micro">Studies &amp; experiments</span>
+          <h2 id="research-title">Research and Case Studies</h2>
+        </div>
+        <div className="research-grid">
+          {researchCases.map(({ name, category, overview, url, repo, current }) => (
+            <article className="research-card" key={name} data-current={current || undefined}>
+              <div className="research-meta">
+                {current && <span className="micro research-current">Current research</span>}
+                <p className="micro">{category}</p>
+              </div>
+              <h3>{name}</h3>
+              <p>{overview}</p>
+              <div className="project-links">
+                {repo && <a className="project-link" href={repo} aria-label={name + " on GitHub"}><Github size={15} aria-hidden="true" /> GitHub</a>}
+                {url && <a className="project-link" href={url} aria-label={name + " live site"}>Live <ArrowUpRight size={13} aria-hidden="true" /></a>}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -394,8 +377,7 @@ function Contact() {
           <figure className="contact-drink">
             <Sparkles className="drink-sparkles" size={30} aria-hidden="true" />
             <Zap className="drink-zap" size={23} aria-hidden="true" />
-            <img src="/media/diet-coke.jpg" alt="Silver Diet Coke can" width={600} height={900} loading="lazy" decoding="async" />
-            <figcaption>I LOVE TO CONSUME</figcaption>
+            <img src="/media/diet-coke-cutout.png" alt="Silver Diet Coke can" width={466} height={700} loading="lazy" decoding="async" />
           </figure>
         </div>
         <div className="contact-footer">
@@ -407,7 +389,7 @@ function Contact() {
             <a href={twitter}><Twitter size={17} aria-hidden="true" /> X / Twitter</a>
           </div>
         </div>
-        <ContactScrapbook />
+        <img className="contact-landscape" src="/media/contact-landscape.webp" alt="" loading="lazy" decoding="async" />
       </div>
       <p className="site-credit">MADE BY I⚡️H</p>
     </footer>
@@ -435,7 +417,7 @@ export function App() {
     const nextTheme = theme === "dark" ? "light" : "dark";
     setTheme(nextTheme);
     document.documentElement.dataset.theme = nextTheme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#1c0b12" : "#f1ecdf");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#0b0b0c" : "#f1ecdf");
     try { localStorage.setItem("eswar-theme", nextTheme); } catch {}
   }
 
