@@ -2,6 +2,7 @@ import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, Menu, RotateCcw, Twitter, Volume2, VolumeX, X } from "lucide-react";
+import { Analytics } from "@vercel/analytics/react";
 import { Intro, shouldShowIntro } from "./Intro";
 import type { IntroPlayer } from "./Intro";
 import { Board, BoardPiece } from "./Board";
@@ -455,6 +456,7 @@ export function App() {
         <Backpack />
         <Contact />
       </main>
+      <Analytics />
     </>
   );
 }
