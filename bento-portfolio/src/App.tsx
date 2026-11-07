@@ -383,6 +383,12 @@ function Backpack() {
             <img className="backpack-coke" src="/media/diet-coke-cutout.png" alt="Silver Diet Coke can" loading="lazy" decoding="async" />
             <figcaption>A must item</figcaption>
           </figure>
+          <a className="backpack-download" href="/media/idea-to-prototype-playbook.pdf" download="Idea-to-Prototype-Playbook.pdf" aria-label="Download Idea to Prototype Playbook PDF">
+            <figure className="backpack-figure backpack-book-figure">
+              <img className="backpack-book" src="/media/idea-to-prototype-playbook-cover.png" alt="Idea to Prototype Playbook cover; click to download the PDF" loading="lazy" decoding="async" />
+              <figcaption>My tool</figcaption>
+            </figure>
+          </a>
         </div>
       </article>
     </section>
