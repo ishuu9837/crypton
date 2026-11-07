@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reveal the new theme from the toggle's position where View Transitions are supported. */
+::view-transition-old(root),
+::view-transition-new(root){animation:none;mix-blend-mode:normal}
+html[data-theme-anim="1"]::view-transition-old(root){z-index:0}
+html[data-theme-anim="1"]::view-transition-new(root){z-index:1;animation:theme-reveal 700ms cubic-bezier(.22,1,.36,1) both}
+@keyframes theme-reveal{
+  from{clip-path:circle(0px at var(--theme-cx) var(--theme-cy))}
+  to{clip-path:circle(var(--theme-r) at var(--theme-cx) var(--theme-cy))}
+}
+@media(prefers-reduced-motion:reduce){html[data-theme-anim="1"]::view-transition-new(root){animation:none}}
+
 :root{
   --black:#0b0b0c;--ice:#f6f5f3;--muted:#c3c0bb;--line:#373532;--surface:#171615;--raised:#23211f;
   --tinted:#23211f;--accent:#fff;--focus-ring:#c5c5c5;--board-dot:#958471;
@@ -228,6 +239,9 @@ html:has(.gate[open]){overflow:hidden;background:#000}
 }
 :is(.white-button,.gate-actions button):hover{background:#e8e8e8;color:#171717}
 .icon-button{width:40px;padding:0}
+.theme-toggle-icons{position:relative;display:block;width:18px;height:18px}
+.theme-icon{position:absolute;inset:0;opacity:0;transform:rotate(-90deg) scale(.2);transition:opacity .3s,transform .3s}
+.theme-icon.is-visible{opacity:1;transform:rotate(0) scale(1)}
 .header-controls{display:flex;align-items:center;gap:6px}
 .header-controls .white-button{min-height:36px;font:500 11px/1.2 var(--font-mono);border-radius:999px}
 .header-controls .icon-button{width:36px}

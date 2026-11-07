@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, Menu, Moon, RotateCcw, Sun, Twitter, Volume2, VolumeX, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Github, Instagram, Linkedin, Mail, Menu, RotateCcw, Twitter, Volume2, VolumeX, X } from "lucide-react";
 import { Intro, shouldShowIntro } from "./Intro";
 import type { IntroPlayer } from "./Intro";
 import { Board, BoardPiece } from "./Board";
+import { ThemeToggle } from "./ThemeToggle";
 import { certifications, email, gallery, github, instagram, linkedin, projects, researchCases, toolkit, twitter } from "./content";
 import type { Project } from "./content";
 
 const easing = [0.25, 0.1, 0.25, 1] as const;
 const nav = [["Projects", "#projects"], ["Research", "#research"], ["Skills", "#toolkit"], ["Gallery", "#gallery"], ["Contact", "#contact"]];
-type Theme = "dark" | "light";
 
 function Reveal({ children, className, delay = 0, x = 0, y = 30 }: {
   children: ReactNode; className?: string; delay?: number; x?: number; y?: number;
@@ -25,8 +25,8 @@ function Reveal({ children, className, delay = 0, x = 0, y = 30 }: {
   </motion.div>;
 }
 
-function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
-  theme: Theme; onThemeChange: () => void; sound: boolean; onSoundChange: () => void; onReplay: () => void;
+function Hero({ sound, onSoundChange, onReplay }: {
+  sound: boolean; onSoundChange: () => void; onReplay: () => void;
 }) {
   const reduced = useReducedMotion();
   const entrance = (delay: number, y: number) => ({
@@ -34,8 +34,6 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
     animate: { opacity: 1, y: 0 },
     transition: { duration: reduced ? 0 : .65, delay: reduced ? 0 : delay, ease: easing },
   });
-  const nextTheme = theme === "dark" ? "light" : "dark";
-
   return (
     <section className="hero" id="home" aria-labelledby="hero-heading">
       <motion.header className="hero-header" {...entrance(0, -12)}>
@@ -49,10 +47,7 @@ function Hero({ theme, onThemeChange, sound, onSoundChange, onReplay }: {
               aria-label="Replay sound" aria-pressed={sound} title={sound ? "Replay sound on" : "Replay sound off"}>
               {sound ? <Volume2 size={17} aria-hidden="true" /> : <VolumeX size={17} aria-hidden="true" />}
             </button>
-            <button className="white-button icon-button" type="button" onClick={onThemeChange}
-              aria-label={"Switch to " + nextTheme + " mode"} title={"Switch to " + nextTheme + " mode"}>
-              {theme === "dark" ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
-            </button>
+            <ThemeToggle />
             <button className="white-button icon-button" type="button" onClick={onReplay} aria-label="Replay intro" title="Replay intro">
               <RotateCcw size={17} aria-hidden="true" />
             </button>
@@ -433,8 +428,6 @@ export function App() {
   const player = useRef<IntroPlayer>(null);
 
   function replay() { player.current?.play(sound); }
-  const [theme, setTheme] = useState<Theme>(() => document.documentElement.dataset.theme === "light" ? "light" : "dark");
-
   useEffect(() => {
     if (location.hash) {
       document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: "instant" });
@@ -442,14 +435,6 @@ export function App() {
       window.scrollTo({ top: 0, behavior: "instant" });
     }
   }, []);
-
-  function toggleTheme() {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
-    document.documentElement.dataset.theme = nextTheme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", nextTheme === "dark" ? "#0b0b0c" : "#f1ecdf");
-    try { localStorage.setItem("eswar-theme", nextTheme); } catch {}
-  }
 
   const finish = useCallback(() => {
     setEntered(true);
@@ -461,7 +446,7 @@ export function App() {
       <a className="skip-content" href="#main">Skip to content</a>
       <Intro ref={player} autoplay={autoplay} onFinish={finish} />
       <main className="site" id="main" tabIndex={-1}>
-        {entered ? <Hero theme={theme} onThemeChange={toggleTheme} sound={sound} onSoundChange={() => setSound(v => !v)} onReplay={replay} /> : <div className="hero-reserve" aria-hidden="true" />}
+        {entered ? <Hero sound={sound} onSoundChange={() => setSound(v => !v)} onReplay={replay} /> : <div className="hero-reserve" aria-hidden="true" />}
         <Projects />
         <Research />
         <Toolkit />
